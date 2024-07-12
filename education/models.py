@@ -1,6 +1,6 @@
 from django.db import models
 from user.models import ModeratorProfile, StudentProfile, TeacherProfile
-from course.models import Course
+from course.models import Course, CourseMatherial
 
 class Group(models.Model):
     title = models.CharField('Name of group', max_length=300, unique=True, blank=False, null=False)
@@ -16,12 +16,14 @@ class Group(models.Model):
 
 class Lesson(models.Model):
     course = models.ForeignKey(Course, verbose_name="Course", related_name='lessons', on_delete=models.CASCADE)
-    title = models.CharField('Lesson title', max_length=300, unique=True, blank=False, null=False)
+    course_material = models.ForeignKey(CourseMatherial, verbose_name="Material of lesson", related_name='lessons', on_delete=models.CASCADE)
+    title = models.CharField('Lesson title', max_length=300, blank=False, null=False)
     description = models.TextField('Lesson description', blank=True, null=True)
     pdf_material = models.FileField('Lesson PDF Material', upload_to='lessons/pdfs/', blank=True, null=True)
     video_url = models.URLField('Lesson Video URL', blank=True, null=True)
     date_create = models.DateTimeField(auto_now_add=True, verbose_name="Date of create")
     teacher = models.ForeignKey(TeacherProfile, verbose_name="Teacher", related_name='lessons', on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, verbose_name="Group", related_name='lessons', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.id}_{self.title}'
@@ -29,8 +31,9 @@ class Lesson(models.Model):
 
 class Homework(models.Model):
     lesson = models.ForeignKey(Lesson, verbose_name="Lesson", related_name='homeworks', on_delete=models.CASCADE)
-    title = models.CharField('Homework title', max_length=300, unique=True, blank=False, null=False)
+    title = models.CharField('Homework title', max_length=300, blank=False, null=False)
     description = models.TextField('Homework description', blank=True, null=True)
+    homework_file = models.FileField('Lesson PDF Homework', upload_to='homeworks/files/', blank=True, null=True)
     due_date = models.DateTimeField('Due date')
     date_create = models.DateTimeField(auto_now_add=True, verbose_name="Date of create")
 
@@ -53,6 +56,8 @@ class Submission(models.Model):
 class Attendance(models.Model):
     lesson = models.ForeignKey(Lesson, verbose_name="Lesson", related_name='attendances', on_delete=models.CASCADE)
     student = models.ForeignKey(StudentProfile, verbose_name="Student", related_name='attendances', on_delete=models.CASCADE)
+    grade_on_lesson = models.IntegerField("lesson grade", blank=True, null=True)
+    grade_on_test = models.IntegerField("lesson grade", blank=True, null=True)
     is_present = models.BooleanField("Is present", default=True)
     date = models.DateTimeField(auto_now_add=True, verbose_name="Date")
 

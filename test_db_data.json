@@ -1,0 +1,2883 @@
+{
+    "User": [
+        {
+            "username": "john_doe",
+            "email": "john.doe@example.com",
+            "first_name": "John",
+            "last_name": "Doe",
+            "password": "Password123",
+            "role": "moderator"
+        },
+        {
+            "username": "jane_smith",
+            "email": "jane.smith@example.com",
+            "first_name": "Jane",
+            "last_name": "Smith",
+            "password": "Password123",
+            "role": "moderator"
+        },
+        {
+            "username": "admin_user",
+            "email": "admin.user@example.com",
+            "first_name": "Admin",
+            "last_name": "User",
+            "password": "Password123",
+            "role": "moderator"
+        },
+        {
+            "username": "teacher1",
+            "email": "teacher1@example.com",
+            "first_name": "Alice",
+            "last_name": "Johnson",
+            "password": "Password123",
+            "role": "teacher"
+        },
+        {
+            "username": "teacher2",
+            "email": "teacher2@example.com",
+            "first_name": "Bob",
+            "last_name": "Williams",
+            "password": "Password123",
+            "role": "teacher"
+        },
+        {
+            "username": "teacher3",
+            "email": "teacher3@example.com",
+            "first_name": "Charlie",
+            "last_name": "Brown",
+            "password": "Password123",
+            "role": "teacher"
+        },
+        {
+            "username": "teacher4",
+            "email": "teacher4@example.com",
+            "first_name": "David",
+            "last_name": "Jones",
+            "password": "Password123",
+            "role": "teacher"
+        },
+        {
+            "username": "teacher5",
+            "email": "teacher5@example.com",
+            "first_name": "Eva",
+            "last_name": "Garcia",
+            "password": "Password123",
+            "role": "teacher"
+        },
+        {
+            "username": "teacher6",
+            "email": "teacher6@example.com",
+            "first_name": "Frank",
+            "last_name": "Martinez",
+            "password": "Password123",
+            "role": "teacher"
+        },
+        {
+            "username": "teacher7",
+            "email": "teacher7@example.com",
+            "first_name": "Grace",
+            "last_name": "Lopez",
+            "password": "Password123",
+            "role": "teacher"
+        },
+        {
+            "username": "teacher8",
+            "email": "teacher8@example.com",
+            "first_name": "Hank",
+            "last_name": "Gonzalez",
+            "password": "Password123",
+            "role": "teacher"
+        },
+        {
+            "username": "student1",
+            "email": "student1@example.com",
+            "first_name": "Liam",
+            "last_name": "Smith",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student2",
+            "email": "student2@example.com",
+            "first_name": "Olivia",
+            "last_name": "Johnson",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student3",
+            "email": "student3@example.com",
+            "first_name": "Noah",
+            "last_name": "Williams",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student4",
+            "email": "student4@example.com",
+            "first_name": "Emma",
+            "last_name": "Brown",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student5",
+            "email": "student5@example.com",
+            "first_name": "Oliver",
+            "last_name": "Jones",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student6",
+            "email": "student6@example.com",
+            "first_name": "Ava",
+            "last_name": "Garcia",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student7",
+            "email": "student7@example.com",
+            "first_name": "Elijah",
+            "last_name": "Martinez",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student8",
+            "email": "student8@example.com",
+            "first_name": "Sophia",
+            "last_name": "Lopez",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student9",
+            "email": "student9@example.com",
+            "first_name": "Lucas",
+            "last_name": "Gonzalez",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student10",
+            "email": "student10@example.com",
+            "first_name": "Mia",
+            "last_name": "Anderson",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student11",
+            "email": "student11@example.com",
+            "first_name": "Mason",
+            "last_name": "Thomas",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student12",
+            "email": "student12@example.com",
+            "first_name": "Isabella",
+            "last_name": "Taylor",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student13",
+            "email": "student13@example.com",
+            "first_name": "Logan",
+            "last_name": "Moore",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student14",
+            "email": "student14@example.com",
+            "first_name": "Amelia",
+            "last_name": "Jackson",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student15",
+            "email": "student15@example.com",
+            "first_name": "James",
+            "last_name": "Martin",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student16",
+            "email": "student16@example.com",
+            "first_name": "Harper",
+            "last_name": "Lee",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student17",
+            "email": "student17@example.com",
+            "first_name": "Ethan",
+            "last_name": "Perez",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student18",
+            "email": "student18@example.com",
+            "first_name": "Evelyn",
+            "last_name": "White",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student19",
+            "email": "student19@example.com",
+            "first_name": "Benjamin",
+            "last_name": "Harris",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student20",
+            "email": "student20@example.com",
+            "first_name": "Abigail",
+            "last_name": "Clark",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student21",
+            "email": "student21@example.com",
+            "first_name": "Aiden",
+            "last_name": "Rodriguez",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student22",
+            "email": "student22@example.com",
+            "first_name": "Chloe",
+            "last_name": "Lewis",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student23",
+            "email": "student23@example.com",
+            "first_name": "Henry",
+            "last_name": "Walker",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student24",
+            "email": "student24@example.com",
+            "first_name": "Scarlett",
+            "last_name": "Hall",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student25",
+            "email": "student25@example.com",
+            "first_name": "Alexander",
+            "last_name": "Young",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student26",
+            "email": "student26@example.com",
+            "first_name": "Ella",
+            "last_name": "Allen",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student27",
+            "email": "student27@example.com",
+            "first_name": "Daniel",
+            "last_name": "King",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student28",
+            "email": "student28@example.com",
+            "first_name": "Mila",
+            "last_name": "Wright",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student29",
+            "email": "student29@example.com",
+            "first_name": "Michael",
+            "last_name": "Scott",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student30",
+            "email": "student30@example.com",
+            "first_name": "Victoria",
+            "last_name": "Green",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student31",
+            "email": "student31@example.com",
+            "first_name": "Jackson",
+            "last_name": "Adams",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student32",
+            "email": "student32@example.com",
+            "first_name": "Grace",
+            "last_name": "Baker",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student33",
+            "email": "student33@example.com",
+            "first_name": "Sebastian",
+            "last_name": "Nelson",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student34",
+            "email": "student34@example.com",
+            "first_name": "Avery",
+            "last_name": "Carter",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student35",
+            "email": "student35@example.com",
+            "first_name": "Jack",
+            "last_name": "Mitchell",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student36",
+            "email": "student36@example.com",
+            "first_name": "Sofia",
+            "last_name": "Perez",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student37",
+            "email": "student37@example.com",
+            "first_name": "David",
+            "last_name": "Roberts",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student38",
+            "email": "student38@example.com",
+            "first_name": "Aria",
+            "last_name": "Campbell",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student39",
+            "email": "student39@example.com",
+            "first_name": "Matthew",
+            "last_name": "Turner",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student40",
+            "email": "student40@example.com",
+            "first_name": "Hannah",
+            "last_name": "Phillips",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student41",
+            "email": "student41@example.com",
+            "first_name": "Joseph",
+            "last_name": "Evans",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student42",
+            "email": "student42@example.com",
+            "first_name": "Luna",
+            "last_name": "Collins",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student43",
+            "email": "student43@example.com",
+            "first_name": "Joshua",
+            "last_name": "Stewart",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student44",
+            "email": "student44@example.com",
+            "first_name": "Zoey",
+            "last_name": "Sanchez",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student45",
+            "email": "student45@example.com",
+            "first_name": "Gabriel",
+            "last_name": "Morris",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student46",
+            "email": "student46@example.com",
+            "first_name": "Layla",
+            "last_name": "Rogers",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student47",
+            "email": "student47@example.com",
+            "first_name": "Samuel",
+            "last_name": "Reed",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student48",
+            "email": "student48@example.com",
+            "first_name": "Lily",
+            "last_name": "Cook",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student49",
+            "email": "student49@example.com",
+            "first_name": "Anthony",
+            "last_name": "Morgan",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student50",
+            "email": "student50@example.com",
+            "first_name": "Sofia",
+            "last_name": "Bell",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student51",
+            "email": "student51@example.com",
+            "first_name": "Emma",
+            "last_name": "Brooks",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student52",
+            "email": "student52@example.com",
+            "first_name": "James",
+            "last_name": "Price",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student53",
+            "email": "student53@example.com",
+            "first_name": "Harper",
+            "last_name": "Bennett",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student54",
+            "email": "student54@example.com",
+            "first_name": "Alexander",
+            "last_name": "Rivera",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student55",
+            "email": "student55@example.com",
+            "first_name": "Avery",
+            "last_name": "Cox",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student56",
+            "email": "student56@example.com",
+            "first_name": "Ella",
+            "last_name": "Ward",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student57",
+            "email": "student57@example.com",
+            "first_name": "Michael",
+            "last_name": "Richardson",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student58",
+            "email": "student58@example.com",
+            "first_name": "Scarlett",
+            "last_name": "Barnes",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student59",
+            "email": "student59@example.com",
+            "first_name": "Daniel",
+            "last_name": "Simmons",
+            "password": "Password123",
+            "role": "student"
+        },
+        {
+            "username": "student60",
+            "email": "student60@example.com",
+            "first_name": "Sofia",
+            "last_name": "Gray",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student61",
+            "email": "student61@example.com",
+            "first_name": "David",
+            "last_name": "Bryant",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student62",
+            "email": "student62@example.com",
+            "first_name": "Hannah",
+            "last_name": "Howard",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student63",
+            "email": "student63@example.com",
+            "first_name": "Henry",
+            "last_name": "Ward",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student64",
+            "email": "student64@example.com",
+            "first_name": "Victoria",
+            "last_name": "Cox",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student65",
+            "email": "student65@example.com",
+            "first_name": "Matthew",
+            "last_name": "Richardson",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student66",
+            "email": "student66@example.com",
+            "first_name": "Luna",
+            "last_name": "Barnes",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student67",
+            "email": "student67@example.com",
+            "first_name": "Joseph",
+            "last_name": "Simmons",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student68",
+            "email": "student68@example.com",
+            "first_name": "Chloe",
+            "last_name": "Gray",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student69",
+            "email": "student69@example.com",
+            "first_name": "Ella",
+            "last_name": "Bryant",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student70",
+            "email": "student70@example.com",
+            "first_name": "Daniel",
+            "last_name": "Howard",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student71",
+            "email": "student71@example.com",
+            "first_name": "Sofia",
+            "last_name": "Ward",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student72",
+            "email": "student72@example.com",
+            "first_name": "David",
+            "last_name": "Cox",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student73",
+            "email": "student73@example.com",
+            "first_name": "Luna",
+            "last_name": "Richardson",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student74",
+            "email": "student74@example.com",
+            "first_name": "Joseph",
+            "last_name": "Barnes",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student75",
+            "email": "student75@example.com",
+            "first_name": "Chloe",
+            "last_name": "Simmons",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student76",
+            "email": "student76@example.com",
+            "first_name": "Ella",
+            "last_name": "Gray",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student77",
+            "email": "student77@example.com",
+            "first_name": "Daniel",
+            "last_name": "Bryant",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student78",
+            "email": "student78@example.com",
+            "first_name": "Sofia",
+            "last_name": "Howard",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student79",
+            "email": "student79@example.com",
+            "first_name": "David",
+            "last_name": "Ward",
+            "password": "Password123",
+            "role": "student" 
+        },
+        {
+            "username": "student80",
+            "email": "student80@example.com",
+            "first_name": "Luna",
+            "last_name": "Cox",
+            "password": "Password123",
+            "role": "student" 
+        }
+    ],
+    "Course": [
+        {
+            "title": "Python Programming Masterclass",
+            "desc": "Learn Python programming from scratch to advanced concepts with practical examples.",
+            "owner_id": 1,
+            "is_active": true,
+            "Lesson_count": 12
+        },
+        {
+            "title": "HTML & CSS Essentials",
+            "desc": "Master the essentials of HTML and CSS to build beautiful and responsive web pages.",
+            "owner_id": 2,
+            "is_active": true,
+            "Lesson_count": 12
+        },
+        {
+            "title": "C++ Programming Fundamentals",
+            "desc": "Explore the fundamentals of C++ programming language with hands-on coding exercises.",
+            "owner_id": 3,
+            "is_active": true,
+            "Lesson_count": 12
+        },
+        {
+            "title": "Data Science with Python",
+            "desc": "Dive into data science using Python, covering data analysis, visualization, and machine learning.",
+            "owner_id": 1,
+            "is_active": true,
+            "Lesson_count": 12
+        },
+        {
+            "title": "Responsive Web Design",
+            "desc": "Learn how to create responsive and mobile-friendly websites using HTML, CSS, and JavaScript.",
+            "owner_id": 2,
+            "is_active": true,
+            "Lesson_count": 12
+        },
+        {
+            "title": "Advanced C++ Programming",
+            "desc": "Advance your C++ skills with topics including templates, STL, and object-oriented programming principles.",
+            "owner_id": 3,
+            "is_active": true,
+            "Lesson_count": 12
+        },
+        {
+            "title": "Machine Learning Foundations",
+            "desc": "Build a strong foundation in machine learning with Python, covering algorithms and model evaluation techniques.",
+            "owner_id": 1,
+            "is_active": true,
+            "Lesson_count": 12
+        },
+        {
+            "title": "CSS Layout Techniques",
+            "desc": "Master advanced CSS layout techniques for creating complex web page layouts.",
+            "owner_id": 2,
+            "is_active": true,
+            "Lesson_count": 12
+        },
+        {
+            "title": "Game Development with C++",
+            "desc": "Explore game development concepts using C++ programming language, including graphics and physics engines.",
+            "owner_id": 3,
+            "is_active": true,
+            "Lesson_count": 12
+        },
+        {
+            "title": "Python for Data Analysis",
+            "desc": "Learn Python tools and libraries for data analysis, including pandas, numpy, and matplotlib.",
+            "owner_id": 1,
+            "is_active": true,
+            "Lesson_count": 12
+        },
+        {
+            "title": "Modern Web Design Principles",
+            "desc": "Explore modern web design principles and techniques for creating visually appealing and user-friendly websites.",
+            "owner_id": 2,
+            "is_active": true,
+            "Lesson_count": 12
+        },
+        {
+            "title": "Data Structures in C++",
+            "desc": "Master data structures and algorithms in C++, including arrays, linked lists, and trees.",
+            "owner_id": 3,
+            "is_active": false,
+            "Lesson_count": 12
+        },
+        {
+            "title": "Python GUI Development",
+            "desc": "Learn how to create graphical user interfaces (GUIs) using Python and tkinter library.",
+            "owner_id": 1,
+            "is_active": false,
+            "Lesson_count": 12
+        },
+        {
+            "title": "SASS and LESS Preprocessors",
+            "desc": "Explore SASS and LESS preprocessors for efficient and maintainable CSS styling.",
+            "owner_id": 2,
+            "is_active": false,
+            "Lesson_count": 12
+        },
+        {
+            "title": "Advanced C++ Techniques",
+            "desc": "Dive deeper into advanced C++ techniques such as memory management, multithreading, and performance optimization.",
+            "owner_id": 3,
+            "is_active": false,
+            "Lesson_count": 12
+        }
+    ],
+    "CourseMaterial": [
+        {
+            "course_title": "Python Programming Masterclass",
+            "materials": [
+                {
+                    "title": "Introduction to Python",
+                    "desc": "An introduction to Python programming language and its features.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Variables and Data Types",
+                    "desc": "Learn about variables, data types, and basic operations in Python.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Control Flow Statements",
+                    "desc": "Understand conditional statements and loops in Python.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Functions and Modules",
+                    "desc": "Explore functions, modules, and their usage in Python.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Exception Handling",
+                    "desc": "Learn how to handle exceptions and errors in Python programs.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "File Handling",
+                    "desc": "Read from and write to files using Python's file handling capabilities.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Object-Oriented Programming Basics",
+                    "desc": "Introduction to object-oriented programming (OOP) concepts in Python.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Inheritance and Polymorphism",
+                    "desc": "Explore inheritance, polymorphism, and method overriding in Python.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Working with Databases",
+                    "desc": "Connect Python applications to databases and perform CRUD operations.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Introduction to Django Framework",
+                    "desc": "Get started with Django framework for web development in Python.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "API Development with Django REST Framework",
+                    "desc": "Build RESTful APIs using Django REST Framework for web and mobile applications.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Testing and Debugging in Python",
+                    "desc": "Learn techniques for testing and debugging Python code effectively.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                }
+            ]
+        },
+        {
+            "course_title": "HTML & CSS Essentials",
+            "materials": [
+                {
+                    "title": "Introduction to HTML",
+                    "desc": "An introduction to HTML including tags, attributes, and structure.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Styling with CSS",
+                    "desc": "Learn how to apply styles to HTML elements using CSS.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Responsive Web Design",
+                    "desc": "Techniques for creating responsive web pages using HTML and CSS.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "CSS Layouts and Positioning",
+                    "desc": "Explore different CSS layout techniques and positioning methods.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Typography and Fonts in Web Design",
+                    "desc": "Understand typography principles and font choices in web design.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Advanced CSS Selectors",
+                    "desc": "Learn advanced CSS selectors and their applications in styling.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "CSS Flexbox and Grid",
+                    "desc": "Master CSS Flexbox and Grid layouts for modern web design.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "HTML Forms and Input Validation",
+                    "desc": "Create HTML forms and validate user input using JavaScript.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "CSS Animations and Transitions",
+                    "desc": "Add animations and transitions to elements using CSS techniques.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Bootstrap Framework",
+                    "desc": "Introduction to Bootstrap framework for responsive and mobile-first web development.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "SASS and LESS Preprocessors",
+                    "desc": "Explore SASS and LESS preprocessors for efficient and maintainable CSS styling.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Web Accessibility Standards",
+                    "desc": "Understand web accessibility guidelines and techniques for inclusive design.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                }
+            ]
+        },
+        {
+            "course_title": "C++ Programming Fundamentals",
+            "materials": [
+                {
+                    "title": "Introduction to C++",
+                    "desc": "An introduction to C++ programming language and its features.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Variables and Data Types in C++",
+                    "desc": "Learn about variables, data types, and basic operations in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Control Flow Statements in C++",
+                    "desc": "Understand conditional statements and loops in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Functions and Function Overloading",
+                    "desc": "Explore functions, parameters, and function overloading in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Arrays and Pointers in C++",
+                    "desc": "Learn about arrays, pointers, and their usage in C++ programming.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Object-Oriented Programming Concepts",
+                    "desc": "Introduction to object-oriented programming (OOP) concepts in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Inheritance and Polymorphism in C++",
+                    "desc": "Explore inheritance, polymorphism, and method overriding in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "File Handling in C++",
+                    "desc": "Read from and write to files using C++ file handling mechanisms.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Exception Handling in C++",
+                    "desc": "Learn how to handle exceptions and errors in C++ programs.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "STL (Standard Template Library)",
+                    "desc": "Overview of STL containers, algorithms, and iterators in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Multi-threading in C++",
+                    "desc": "Introduction to multi-threading concepts and synchronization in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Advanced C++ Features",
+                    "desc": "Explore advanced C++ features including lambda expressions and move semantics.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                }
+            ]
+        },
+        {
+            "course_title": "Data Science with Python",
+            "materials": [
+                {
+                    "title": "Introduction to Data Science",
+                    "desc": "An introduction to data science and its applications.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Python Basics for Data Science",
+                    "desc": "Learn basic Python programming skills necessary for data science.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Data Manipulation with Pandas",
+                    "desc": "Introduction to Pandas library for data manipulation and analysis.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Data Visualization with Matplotlib",
+                    "desc": "Learn how to create various types of plots and visualizations using Matplotlib.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Introduction to NumPy",
+                    "desc": "Explore NumPy library for numerical computing in Python.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Statistical Analysis with SciPy",
+                    "desc": "Perform statistical analysis and hypothesis testing using SciPy library.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Machine Learning Fundamentals",
+                    "desc": "Overview of machine learning concepts and algorithms.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Supervised Learning Techniques",
+                    "desc": "Explore supervised learning algorithms like regression and classification.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Unsupervised Learning Techniques",
+                    "desc": "Learn about clustering and dimensionality reduction in unsupervised learning.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Natural Language Processing (NLP)",
+                    "desc": "Introduction to NLP techniques for text data processing and analysis.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Deep Learning Fundamentals",
+                    "desc": "Introduction to deep learning concepts and neural networks.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Data Science Projects and Applications",
+                    "desc": "Apply data science techniques to real-world projects and applications.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                }
+            ]
+        },
+        {
+            "course_title": "Responsive Web Design",
+            "materials": [
+                {
+                    "title": "Introduction to Responsive Web Design",
+                    "desc": "An introduction to responsive web design principles and techniques.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "HTML5 Semantic Elements",
+                    "desc": "Learn about HTML5 semantic elements and their role in modern web design.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "CSS Media Queries",
+                    "desc": "Understand CSS media queries for creating responsive layouts.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Responsive Images and Video",
+                    "desc": "Techniques for optimizing images and video for responsive web design.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Flexbox Layout",
+                    "desc": "Master CSS Flexbox layout for building flexible and responsive web pages.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Grid Layout",
+                    "desc": "Explore CSS Grid layout for creating complex grid-based designs.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Responsive Typography",
+                    "desc": "Design principles and techniques for responsive typography.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Accessibility in Responsive Design",
+                    "desc": "Ensure accessibility considerations in responsive web design.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "CSS Frameworks for Responsive Design",
+                    "desc": "Introduction to CSS frameworks like Bootstrap for rapid responsive web development.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Responsive Web Design Best Practices",
+                    "desc": "Best practices for creating efficient and maintainable responsive web designs.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Testing and Debugging Responsive Websites",
+                    "desc": "Techniques for testing and debugging responsive websites across devices.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Advanced Responsive Web Design Techniques",
+                    "desc": "Explore advanced techniques for responsive web design including fluid layouts and viewport units.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                }
+            ]
+        },
+        {
+            "course_title": "Advanced C++ Programming",
+            "materials": [
+                {
+                    "title": "Advanced Topics in C++",
+                    "desc": "Explore advanced features and techniques in C++ programming language.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Template Metaprogramming",
+                    "desc": "Learn about template metaprogramming for generic programming in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Concurrency in C++",
+                    "desc": "Understand concurrency models and multithreading in C++ programming.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "STL Algorithms and Data Structures",
+                    "desc": "Explore standard template library (STL) algorithms and data structures in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Advanced Memory Management",
+                    "desc": "Techniques for efficient memory management and optimization in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Networking and Socket Programming in C++",
+                    "desc": "Introduction to networking concepts and socket programming using C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Parallel Computing with C++",
+                    "desc": "Explore parallel computing techniques and libraries in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Advanced C++ Design Patterns",
+                    "desc": "Learn about advanced design patterns and their implementation in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Error Handling and Exception Safety",
+                    "desc": "Best practices for error handling and exception safety in C++ programming.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "C++ Performance Optimization",
+                    "desc": "Techniques for optimizing performance and efficiency in C++ programs.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Advanced Topics in C++ Standard",
+                    "desc": "Explore advanced features and updates in the C++ standard.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Debugging and Profiling C++ Applications",
+                    "desc": "Techniques for debugging and profiling C++ applications for performance analysis.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                }
+            ]
+        },
+        {
+            "course_title": "Machine Learning Foundations",
+            "materials": [
+                {
+                    "title": "Introduction to Machine Learning",
+                    "desc": "An introduction to machine learning concepts, algorithms, and applications.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Linear Regression",
+                    "desc": "Learn about linear regression models and their applications in machine learning.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Logistic Regression",
+                    "desc": "Understand logistic regression and its use in classification tasks.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Decision Trees and Random Forests",
+                    "desc": "Explore decision tree algorithms and ensemble methods like random forests.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Support Vector Machines (SVM)",
+                    "desc": "Introduction to support vector machines for classification and regression tasks.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Clustering Algorithms",
+                    "desc": "Learn about clustering techniques such as K-means and hierarchical clustering.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Dimensionality Reduction Techniques",
+                    "desc": "Techniques for reducing the dimensionality of data including PCA and t-SNE.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Neural Networks and Deep Learning",
+                    "desc": "Introduction to neural networks and deep learning architectures.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Natural Language Processing (NLP)Repeat",
+                    "desc": "Explore NLP techniques for text data processing and analysis.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Reinforcement Learning",
+                    "desc": "Introduction to reinforcement learning algorithms and applications.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Machine Learning Model Evaluation",
+                    "desc": "Techniques for evaluating and validating machine learning models.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Machine Learning Projects and Applications",
+                    "desc": "Apply machine learning techniques to real-world projects and applications.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                }
+            ]
+        },
+        {
+            "course_title": "CSS Layout Techniques",
+            "materials": [
+                {
+                    "title": "Introduction to CSS Layouts",
+                    "desc": "An introduction to CSS layout techniques and strategies.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Box Model and Positioning",
+                    "desc": "Understand the CSS box model and positioning techniques.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Floats and Clearfix Hack",
+                    "desc": "Learn how to use floats and clearfix hack for layout designs.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "CSS Flexbox Layout",
+                    "desc": "Master CSS Flexbox layout for creating flexible and responsive designs.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "CSS Grid Layout",
+                    "desc": "Explore CSS Grid layout for creating advanced grid-based layouts.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Responsive Design with CSS",
+                    "desc": "Techniques for creating responsive designs using CSS media queries.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "CSS Layout Frameworks",
+                    "desc": "Introduction to CSS frameworks like Bootstrap for rapid layout development.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Multi-column Layouts",
+                    "desc": "Explore multi-column layouts in CSS for complex text and content structures.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Grid Systems in CSS",
+                    "desc": "Learn about grid systems and their application in CSS layout designs.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Advanced CSS Layout Techniques",
+                    "desc": "Explore advanced techniques for CSS layout including flexbox and grid.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "CSS Layout Best Practices",
+                    "desc": "Best practices for efficient and maintainable CSS layout designs.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Testing and Debugging CSS Layouts",
+                    "desc": "Techniques for testing and debugging CSS layouts across different browsers.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                }
+            ]
+        },
+        {
+            "course_title": "Game Development with C++",
+            "materials": [
+                {
+                    "title": "Introduction to Game Development",
+                    "desc": "An introduction to game development concepts and methodologies.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Setting Up Development Environment",
+                    "desc": "Guide to setting up the development environment for game development with C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Game Design Principles",
+                    "desc": "Explore fundamental game design principles and concepts.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "2D Game Development in C++",
+                    "desc": "Learn how to develop 2D games using C++ and SDL or SFML libraries.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Physics Simulation in Games",
+                    "desc": "Techniques for implementing physics simulation in game development.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Game AI Programming",
+                    "desc": "Introduction to artificial intelligence techniques for game characters and behavior.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Audio Programming for Games",
+                    "desc": "Learn how to implement audio features and sound effects in games using C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Networking and Multiplayer Games",
+                    "desc": "Techniques for implementing networking and multiplayer features in C++ games.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "3D Game Development Basics",
+                    "desc": "Introduction to 3D game development basics using C++ and OpenGL or DirectX.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Game Optimization Techniques",
+                    "desc": "Techniques for optimizing game performance and efficiency in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Debugging and Profiling Games",
+                    "desc": "Techniques for debugging and profiling C++ games for performance analysis.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Publishing and Marketing Games",
+                    "desc": "Guide to publishing and marketing games developed with C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                }
+            ]
+        },
+        {
+            "course_title": "Python for Data Analysis",
+            "materials": [
+                {
+                    "title": "Introduction to Python for Data Analysis",
+                    "desc": "An introduction to Python and its use in data analysis.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Working with Pandas Library",
+                    "desc": "Learn how to use the Pandas library for data manipulation and analysis.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Data Visualization with Matplotlib repeat",
+                    "desc": "Techniques for creating visualizations using Matplotlib library.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Exploratory Data Analysis (EDA)",
+                    "desc": "Introduction to EDA techniques for analyzing and understanding data.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Data Cleaning and Preprocessing",
+                    "desc": "Techniques for cleaning and preprocessing data using Python.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Statistical Analysis with Python",
+                    "desc": "Perform statistical analysis using Python libraries like NumPy and SciPy.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Machine Learning with Python",
+                    "desc": "Introduction to machine learning algorithms and their implementation in Python.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Time Series Analysis",
+                    "desc": "Techniques for analyzing time series data using Python and Pandas.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Big Data Analytics with Python",
+                    "desc": "Introduction to big data analytics tools and techniques using Python.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Data Science Projects",
+                    "desc": "Apply Python and data analysis techniques to real-world data science projects.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Data Visualization Libraries (Seaborn, Plotly)",
+                    "desc": "Explore advanced data visualization techniques using Seaborn and Plotly.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Deploying Data Analysis Applications",
+                    "desc": "Guide to deploying data analysis applications and sharing insights.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                }
+            ]
+        },
+        {
+            "course_title": "Modern Web Design Principles",
+            "materials": [
+                {
+                    "title": "Introduction to Modern Web Design",
+                    "desc": "An introduction to modern web design principles and trends.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Typography in Web Design",
+                    "desc": "Learn how to use typography effectively in web design.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Color Theory and Palettes",
+                    "desc": "Explore color theory and how to create effective color palettes for web design.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Responsive Web Design Basics",
+                    "desc": "Techniques for creating responsive web designs that work across devices.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "User Experience (UX) Design",
+                    "desc": "Introduction to UX design principles and user-centered design.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "UI Design Fundamentals",
+                    "desc": "Fundamental principles of UI design and creating intuitive user interfaces.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Accessibility in Web Design",
+                    "desc": "Techniques for creating accessible web designs for users with disabilities.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Animation and Interaction Design",
+                    "desc": "Using animation and interactive elements in modern web design.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Web Design Tools and Software",
+                    "desc": "Overview of popular tools and software used in modern web design.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Designing for Mobile Devices",
+                    "desc": "Techniques for designing web interfaces specifically for mobile devices.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Web Performance Optimization",
+                    "desc": "Strategies for optimizing web performance and page load times.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Web Design Trends and Innovations",
+                    "desc": "Exploring current web design trends and innovative practices.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                }
+            ]
+        },
+        {
+            "course_title": "Data Structures in C++",
+            "materials": [
+                {
+                    "title": "Introduction to Data Structures",
+                    "desc": "An introduction to basic data structures and their importance in programming.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Arrays and Dynamic Arrays",
+                    "desc": "Understanding arrays and dynamic arrays in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Linked Lists",
+                    "desc": "Learn about linked lists and their implementations in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Stacks and Queues",
+                    "desc": "Introduction to stack and queue data structures.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Trees: Binary Trees and Binary Search Trees",
+                    "desc": "Understanding binary trees and binary search trees.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Trees: AVL Trees and Red-Black Trees",
+                    "desc": "Exploring AVL trees and red-black trees for balanced binary search trees.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Graphs: Representation and Traversal",
+                    "desc": "Techniques for representing graphs and traversing them in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Graph Algorithms: Shortest Path Algorithms",
+                    "desc": "Study shortest path algorithms such as Dijkstra's and Bellman-Ford.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Graph Algorithms: Minimum Spanning Tree",
+                    "desc": "Learn about minimum spanning tree algorithms like Prim's and Kruskal's.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Hash Tables and Hash Functions",
+                    "desc": "Understanding hash tables and hash functions in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Advanced Data Structures",
+                    "desc": "Explore advanced data structures such as heaps and tries.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Applications of Data Structures",
+                    "desc": "Real-world applications and examples of data structures in programming.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                }
+            ]
+        },
+        {
+            "course_title": "Python GUI Development",
+            "materials": [
+                {
+                    "title": "Introduction to GUI Programming",
+                    "desc": "An introduction to graphical user interface (GUI) programming concepts.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Tkinter Basics",
+                    "desc": "Learn the basics of GUI programming in Python using Tkinter.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Creating Widgets and Layouts",
+                    "desc": "Techniques for creating widgets and arranging layouts in Tkinter.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Event Handling in Tkinter",
+                    "desc": "Handling events and user interactions in Tkinter applications.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Advanced Widgets and Customization",
+                    "desc": "Explore advanced widgets and customization options in Tkinter.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Working with Menus and Toolbars",
+                    "desc": "Creating menus, toolbars, and other GUI elements in Tkinter.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Dialog Windows and Pop-ups",
+                    "desc": "Using dialog windows and pop-up messages in Tkinter applications.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Drawing and Canvas Operations",
+                    "desc": "Drawing shapes and performing canvas operations in Tkinter.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Multi-Window Applications",
+                    "desc": "Techniques for building multi-window GUI applications in Python.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Data Visualization in GUIs",
+                    "desc": "Integrating data visualization tools and libraries into Tkinter GUIs.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Packaging and Distributing GUI Applications",
+                    "desc": "Guide to packaging and distributing Python GUI applications.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                },
+                {
+                    "title": "Creating Interactive GUI Projects",
+                    "desc": "Develop interactive GUI projects using Python and Tkinter.",
+                    "pdf_file": null,
+                    "owner_id": 1
+                }
+            ]
+        },
+        {
+            "course_title": "SASS and LESS Preprocessors",
+            "materials": [
+                {
+                    "title": "Introduction to CSS Preprocessors",
+                    "desc": "An introduction to CSS preprocessors and their advantages.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Installing and Setting Up SASS",
+                    "desc": "Guide to installing and setting up SASS for CSS preprocessing.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Variables and Mixins in SASS",
+                    "desc": "Using variables and mixins to streamline CSS code in SASS.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Nesting and Parent Selectors in SASS",
+                    "desc": "Techniques for nesting selectors and using parent selectors in SASS.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Control Directives and Functions in SASS",
+                    "desc": "Overview of control directives and functions available in SASS.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "SASS Best Practices",
+                    "desc": "Best practices for organizing and structuring SASS code.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "LESS Basics",
+                    "desc": "Learn the basics of using LESS for CSS preprocessing.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Variables and Operations in LESS",
+                    "desc": "Using variables and performing operations in LESS stylesheets.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Mixins and Functions in LESS",
+                    "desc": "Creating and using mixins and functions in LESS.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Nested Rules and Escaping in LESS",
+                    "desc": "Techniques for nesting rules and escaping selectors in LESS.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Advanced LESS Features",
+                    "desc": "Explore advanced features and capabilities of the LESS preprocessor.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                },
+                {
+                    "title": "Using SASS and LESS in Real Projects",
+                    "desc": "Practical examples and applications of SASS and LESS in web development.",
+                    "pdf_file": null,
+                    "owner_id": 2
+                }
+            ]
+        },
+        {
+            "course_title": "Advanced C++ Techniques",
+            "materials": [
+                {
+                    "title": "Introduction to Advanced C++ Techniques",
+                    "desc": "An introduction to advanced techniques and features in C++ programming.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Template Metaprogramming repeat",
+                    "desc": "Learn about template metaprogramming and its applications in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "STL Algorithms and Containers",
+                    "desc": "Exploring the Standard Template Library (STL) algorithms and containers.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Concurrency and Multithreading",
+                    "desc": "Techniques for implementing concurrency and multithreading in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Smart Pointers and Memory Management",
+                    "desc": "Using smart pointers and managing memory effectively in C++ programs.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Exception Handling Strategies",
+                    "desc": "Strategies for handling exceptions and errors in C++ programs.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Advanced Object-Oriented Programming",
+                    "desc": "Advanced concepts in object-oriented programming (OOP) using C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Lambda Expressions and C++11 Features",
+                    "desc": "Using lambda expressions and other features introduced in C++11.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Design Patterns in C++",
+                    "desc": "Exploring common design patterns and their implementations in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Performance Optimization Techniques",
+                    "desc": "Techniques for optimizing performance and efficiency in C++ programs.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Advanced File Handling and I/O Operations",
+                    "desc": "Advanced techniques for file handling and input/output operations in C++.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                },
+                {
+                    "title": "Debugging and Profiling Tools",
+                    "desc": "Tools and techniques for debugging and profiling C++ applications.",
+                    "pdf_file": null,
+                    "owner_id": 3
+                }
+            ]
+        }
+    ],
+    "Group": [
+        {
+            "title": "5340",
+            "desc": "april 16",
+            "owner_id": 1,
+            "students": [
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20
+            ]
+        },
+        {
+            "title": "5345",
+            "desc": "april 20",
+            "owner_id": 1,
+            "students": [
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30
+            ]
+        },
+        {
+            "title": "5350",
+            "desc": "May 20",
+            "owner_id": 1,
+            "students": [
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40
+            ]
+        },
+        {
+            "title": "5355",
+            "desc": "May 9",
+            "owner_id": 1,
+            "students": [
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50
+            ]
+        },
+        {
+            "title": "5360",
+            "desc": "May 9",
+            "owner_id": 1,
+            "students": [
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60
+            ]
+        },
+        {
+            "title": "5365",
+            "desc": "May 11",
+            "owner_id": 1,
+            "students": [
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70
+            ]
+        },
+        {
+            "title": "5370",
+            "desc": "Sept 11",
+            "owner_id": 1,
+            "students": [
+                71,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80
+            ]
+        }
+    ],
+    "Lesson": [
+        {
+            "course": "Python Programming Masterclass",
+            "matherial_title": "Introduction to Python",
+            "title": "Introduction to Python",
+            "description": "An overview of Python programming language and its features.",
+            "teacher": 4,
+            "group_title": "5340"
+        },
+        {
+            "course": "HTML & CSS Essentials",
+            "matherial_title": "Introduction to HTML",
+            "title": "Introduction to HTML",
+            "description": "Basic introduction to HTML structure and elements.",
+            "teacher": 5,
+            "group_title": "5345"
+        },
+        {
+            "course": "Python Programming Masterclass",
+            "matherial_title": "Variables and Data Types",
+            "title": "Introduction to Python",
+            "description": "An overview of Python programming language and its features.",
+            "teacher": 4,
+            "group_title": "5340"
+        },
+        {
+            "course": "Python Programming Masterclass",
+            "matherial_title": "Control Flow Statements",
+            "title": "Functions and Modules in Python",
+            "description": "Exploring functions and modules in Python for structured programming.",
+            "teacher": 4,
+            "group_title": "5345"
+        },
+        {
+            "course": "HTML & CSS Essentials",
+            "matherial_title": "Styling with CSS",
+            "title": "Basic HTML Tags",
+            "description": "Introduction to basic HTML tags and their usage.",
+            "teacher": 4,
+            "group_title": "5345"
+        },
+        {
+            "course": "HTML & CSS Essentials",
+            "matherial_title": "Responsive Web Design",
+            "title": "Styling with CSS",
+            "description": "Fundamentals of CSS for styling web pages.",
+            "teacher": 4,
+            "group_title": "5350"
+        },
+        {
+            "course": "C++ Programming Fundamentals",
+            "matherial_title": "Introduction to C++",
+            "title": "Introduction to C++",
+            "description": "An introduction to the C++ programming language.",
+            "teacher": 4,
+            "group_title": "5340"
+        },
+        {
+            "course": "C++ Programming Fundamentals",
+            "matherial_title": "Variables and Data Types in C++",
+            "title": "Object-Oriented Programming in C++",
+            "description": "Exploring object-oriented concepts in C++.",
+            "teacher": 4,
+            "group_title": "5350"
+        },
+        {
+            "course": "Python Programming Masterclass",
+            "matherial_title": "Functions and Modules",
+            "title": "Python Data Structures",
+            "description": "Exploring data structures like lists, dictionaries, and tuples in Python.",
+            "teacher": 4,
+            "group_title": "5350"
+        },
+        {
+            "course": "Python Programming Masterclass",
+            "matherial_title": "Exception Handling",
+            "title": "File Handling in Python",
+            "description": "Working with files and file operations in Python.",
+            "teacher": 4,
+            "group_title": "5340"
+        },
+        {
+            "course": "HTML & CSS Essentials",
+            "matherial_title": "CSS Layouts and Positioning",
+            "title": "Advanced CSS Techniques",
+            "description": "Advanced techniques for styling web pages using CSS.",
+            "teacher": 4,
+            "group_title": "5340"
+        },
+        {
+            "course": "HTML & CSS Essentials",
+            "matherial_title": "Typography and Fonts in Web Design",
+            "title": "Responsive Web Design",
+            "description": "Designing responsive web pages using HTML and CSS.",
+            "teacher": 4,
+            "group_title": "5350"
+        },
+        {
+            "course": "C++ Programming Fundamentals",
+            "matherial_title": "Control Flow Statements in C++",
+            "title": "Pointers and Memory Management",
+            "description": "Understanding pointers and memory management in C++.",
+            "teacher": 4,
+            "group_title": "5345"
+        },
+        {
+            "course": "C++ Programming Fundamentals",
+            "matherial_title": "Functions and Function Overloading",
+            "title": "Templates in C++",
+            "description": "Using templates for generic programming in C++.",
+            "teacher": 4,
+            "group_title": "5340"
+        },
+        {
+            "course": "Python Programming Masterclass",
+            "matherial_title": "File Handling",
+            "title": "Object-Oriented Programming in Python",
+            "description": "Introduction to object-oriented programming concepts in Python.",
+            "teacher": 4,
+            "group_title": "5345"
+        },
+        {
+            "course": "Python Programming Masterclass",
+            "matherial_title": "Object-Oriented Programming Basics",
+            "title": "Python GUI Programming",
+            "description": "Creating graphical user interfaces using Python libraries.",
+            "teacher": 4,
+            "group_title": "5350"
+        },
+        {
+            "course": "HTML & CSS Essentials",
+            "matherial_title": "Advanced CSS Selectors",
+            "title": "Semantic HTML5",
+            "description": "Using semantic HTML5 elements for better web page structure.",
+            "teacher": 4,
+            "group_title": "5345"
+        },
+        {
+            "course": "HTML & CSS Essentials",
+            "matherial_title": "CSS Flexbox and Grid",
+            "title": "CSS Grid Layout",
+            "description": "Exploring CSS grid layout for creating complex web layouts.",
+            "teacher": 4,
+            "group_title": "5340"
+        },
+        {
+            "course": "C++ Programming Fundamentals",
+            "matherial_title": "Arrays and Pointers in C++",
+            "title": "Exception Handling in C++",
+            "description": "Handling exceptions and errors in C++ programs.",
+            "teacher": 4,
+            "group_title": "5350"
+        },
+        {
+            "course": "C++ Programming Fundamentals",
+            "matherial_title": "Object-Oriented Programming Concepts",
+            "title": "STL Containers in C++",
+            "description": "Using standard template library containers in C++ programming.",
+            "teacher": 4,
+            "group_title": "5345"
+        },
+        {
+            "course": "Python Programming Masterclass",
+            "matherial_title": "Inheritance and Polymorphism",
+            "title": "Python Decorators",
+            "description": "Understanding decorators for enhancing Python functions.",
+            "teacher": 4,
+            "group_title": "5350"
+        },
+        {
+            "course": "Python Programming Masterclass",
+            "matherial_title": "Working with Databases",
+            "title": "Web Scraping with Python",
+            "description": "Introduction to web scraping techniques using Python libraries.",
+            "teacher": 4,
+            "group_title": "5340"
+        },
+        {
+            "course": "HTML & CSS Essentials",
+            "matherial_title": "HTML Forms and Input Validation",
+            "title": "CSS Flexbox Layout",
+            "description": "Using CSS flexbox for flexible layout design in web pages.",
+            "teacher": 4,
+            "group_title": "5340"
+        }
+
+    ],
+    "Homework": [
+        {
+            "lesson": 1,
+            "title": "Introduction to Python Homework",
+            "description": "Complete homework assignment for Introduction to Python.",
+            "due_date": "2024-07-12T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 2,
+            "title": "Functions and Modules in Python Homework",
+            "description": "Complete homework assignment for Functions and Modules in Python.",
+            "due_date": "2024-07-15T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 3,
+            "title": "Basic HTML Tags Homework",
+            "description": "Complete homework assignment for Basic HTML Tags.",
+            "due_date": "2024-07-14T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 4,
+            "title": "Styling with CSS Homework",
+            "description": "Complete homework assignment for Styling with CSS.",
+            "due_date": "2024-07-17T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 5,
+            "title": "Introduction to C++ Homework",
+            "description": "Complete homework assignment for Introduction to C++.",
+            "due_date": "2024-07-13T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 6,
+            "title": "Object-Oriented Programming in C++ Homework",
+            "description": "Complete homework assignment for Object-Oriented Programming in C++.",
+            "due_date": "2024-07-16T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 7,
+            "title": "Python Data Structures Homework",
+            "description": "Complete homework assignment for Python Data Structures.",
+            "due_date": "2024-07-18T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 8,
+            "title": "File Handling in Python Homework",
+            "description": "Complete homework assignment for File Handling in Python.",
+            "due_date": "2024-07-21T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 9,
+            "title": "Advanced CSS Techniques Homework",
+            "description": "Complete homework assignment for Advanced CSS Techniques.",
+            "due_date": "2024-07-20T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 10,
+            "title": "Responsive Web Design Homework",
+            "description": "Complete homework assignment for Responsive Web Design.",
+            "due_date": "2024-07-23T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 11,
+            "title": "Pointers and Memory Management Homework",
+            "description": "Complete homework assignment for Pointers and Memory Management.",
+            "due_date": "2024-07-19T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 12,
+            "title": "Templates in C++ Homework",
+            "description": "Complete homework assignment for Templates in C++.",
+            "due_date": "2024-07-22T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 13,
+            "title": "Object-Oriented Programming in Python Homework",
+            "description": "Complete homework assignment for Object-Oriented Programming in Python.",
+            "due_date": "2024-07-25T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 14,
+            "title": "Python GUI Programming Homework",
+            "description": "Complete homework assignment for Python GUI Programming.",
+            "due_date": "2024-07-24T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 15,
+            "title": "Semantic HTML5 Homework",
+            "description": "Complete homework assignment for Semantic HTML5.",
+            "due_date": "2024-07-27T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 16,
+            "title": "CSS Grid Layout Homework",
+            "description": "Complete homework assignment for CSS Grid Layout.",
+            "due_date": "2024-07-26T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 17,
+            "title": "Exception Handling in C++ Homework",
+            "description": "Complete homework assignment for Exception Handling in C++.",
+            "due_date": "2024-07-29T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 18,
+            "title": "STL Containers in C++ Homework",
+            "description": "Complete homework assignment for STL Containers in C++.",
+            "due_date": "2024-07-28T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 19,
+            "title": "Python Decorators Homework",
+            "description": "Complete homework assignment for Python Decorators.",
+            "due_date": "2024-07-31T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 20,
+            "title": "Web Scraping with Python Homework",
+            "description": "Complete homework assignment for Web Scraping with Python.",
+            "due_date": "2024-08-01T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 21,
+            "title": "CSS Flexbox Layout Homework",
+            "description": "Complete homework assignment for CSS Flexbox Layout.",
+            "due_date": "2024-08-02T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        },
+        {
+            "lesson": 22,
+            "title": "Python Data Structures Homework 2",
+            "description": "Complete homework assignment for Python Data Structures.",
+            "due_date": "2024-08-03T18:00:00Z",
+            "date_create": "2024-07-10T10:00:00Z"
+        }
+    ],
+    "Submission": [
+        {
+            "homework": 1,
+            "student": 12,
+            "date_submitted": "2024-07-10T12:00:00Z",
+            "grade": 9,
+            "comment": "Good effort."
+          },
+          {
+            "homework": 1,
+            "student": 13,
+            "date_submitted": "2024-07-10T12:00:00Z",
+            "grade": 8,
+            "comment": "Well done!"
+          },
+          {
+            "homework": 3,
+            "student": 12,
+            "date_submitted": "2024-07-12T12:00:00Z",
+            "grade": 10,
+            "comment": "Excellent work!"
+          },
+          {
+            "homework": 3,
+            "student": 13,
+            "date_submitted": "2024-07-12T12:00:00Z",
+            "grade": 7,
+            "comment": "Good job."
+          },
+          {
+            "homework": 7,
+            "student": 12,
+            "date_submitted": "2024-07-16T12:00:00Z",
+            "grade": 11,
+            "comment": "Very well done!"
+          },
+          {
+            "homework": 7,
+            "student": 13,
+            "date_submitted": "2024-07-16T12:00:00Z",
+            "grade": 6,
+            "comment": "Needs improvement."
+          },
+          {
+            "homework": 10,
+            "student": 12,
+            "date_submitted": "2024-07-19T12:00:00Z",
+            "grade": 9,
+            "comment": "Solid work."
+          },
+          {
+            "homework": 10,
+            "student": 13,
+            "date_submitted": "2024-07-19T12:00:00Z",
+            "grade": 8,
+            "comment": "Well presented."
+          },
+          {
+            "homework": 2,
+            "student": 21,
+            "date_submitted": "2024-07-11T14:00:00Z",
+            "grade": 9,
+            "comment": "Good effort."
+          },
+          {
+            "homework": 2,
+            "student": 23,
+            "date_submitted": "2024-07-11T14:00:00Z",
+            "grade": 7,
+            "comment": "Could improve."
+          },
+          {
+            "homework": 4,
+            "student": 21,
+            "date_submitted": "2024-07-13T14:00:00Z",
+            "grade": 10,
+            "comment": "Well explained."
+          },
+          {
+            "homework": 4,
+            "student": 23,
+            "date_submitted": "2024-07-13T14:00:00Z",
+            "grade": 8,
+            "comment": "Good attempt."
+          },
+          {
+            "homework": 8,
+            "student": 21,
+            "date_submitted": "2024-07-17T14:00:00Z",
+            "grade": 11,
+            "comment": "Excellent work!"
+          },
+          {
+            "homework": 8,
+            "student": 23,
+            "date_submitted": "2024-07-17T14:00:00Z",
+            "grade": 6,
+            "comment": "Needs improvement."
+          },
+          {
+            "homework": 5,
+            "student": 21,
+            "date_submitted": "2024-07-14T12:00:00Z",
+            "grade": 9,
+            "comment": "Solid work."
+          },
+          {
+            "homework": 5,
+            "student": 23,
+            "date_submitted": "2024-07-14T12:00:00Z",
+            "grade": 8,
+            "comment": "Well presented."
+          },
+          {
+            "homework": 1,
+            "student": 27,
+            "date_submitted": "2024-07-10T12:00:00Z",
+            "grade": 9,
+            "comment": "Good effort."
+          },
+          {
+            "homework": 1,
+            "student": 29,
+            "date_submitted": "2024-07-10T12:00:00Z",
+            "grade": 7,
+            "comment": "Could be improved."
+          },
+          {
+            "homework": 3,
+            "student": 27,
+            "date_submitted": "2024-07-12T12:00:00Z",
+            "grade": 10,
+            "comment": "Well done!"
+          },
+          {
+            "homework": 3,
+            "student": 29,
+            "date_submitted": "2024-07-12T12:00:00Z",
+            "grade": 8,
+            "comment": "Good effort."
+          },
+          {
+            "homework": 7,
+            "student": 27,
+            "date_submitted": "2024-07-16T12:00:00Z",
+            "grade": 11,
+            "comment": "Excellent work!"
+          },
+          {
+            "homework": 7,
+            "student": 29,
+            "date_submitted": "2024-07-16T12:00:00Z",
+            "grade": 6,
+            "comment": "Needs improvement."
+          },
+          {
+            "homework": 10,
+            "student": 27,
+            "date_submitted": "2024-07-19T12:00:00Z",
+            "grade": 9,
+            "comment": "Solid work."
+          },
+          {
+            "homework": 10,
+            "student": 29,
+            "date_submitted": "2024-07-19T12:00:00Z",
+            "grade": 8,
+            "comment": "Well presented."
+          }
+    ],
+    "Attendance": [
+          {
+            "lesson": 1,
+            "student": 12,
+            "grade_on_lesson": 7,
+            "grade_on_test": 8,
+            "is_present": true
+          },
+          {
+            "lesson": 1,
+            "student": 13,
+            "grade_on_lesson": 9,
+            "grade_on_test": 10,
+            "is_present": true
+          },
+          {
+            "lesson": 3,
+            "student": 14,
+            "grade_on_lesson": 6,
+            "grade_on_test": 7,
+            "is_present": true
+          },
+          {
+            "lesson": 3,
+            "student": 15,
+            "grade_on_lesson": 8,
+            "grade_on_test": 9,
+            "is_present": true
+          },
+          {
+            "lesson": 3,
+            "student": 16,
+            "grade_on_lesson": 7,
+            "grade_on_test": 8,
+            "is_present": true
+          },
+          {
+            "lesson": 7,
+            "student": 17,
+            "grade_on_lesson": 9,
+            "grade_on_test": 10,
+            "is_present": true
+          },
+          {
+            "lesson": 7,
+            "student": 18,
+            "grade_on_lesson": 8,
+            "grade_on_test": 9,
+            "is_present": true
+          },
+          {
+            "lesson": 7,
+            "student": 19,
+            "grade_on_lesson": 7,
+            "grade_on_test": 8,
+            "is_present": true
+          },
+          {
+            "lesson": 1,
+            "student": 14,
+            "grade_on_lesson": 6,
+            "grade_on_test": 7,
+            "is_present": true
+          },
+          {
+            "lesson": 3,
+            "student": 20,
+            "grade_on_lesson": 8,
+            "grade_on_test": 9,
+            "is_present": true
+          },
+          {
+            "lesson": 1,
+            "student": 15,
+            "grade_on_lesson": 9,
+            "grade_on_test": 10,
+            "is_present": true
+          },
+          {
+            "lesson": 7,
+            "student": 12,
+            "grade_on_lesson": 9,
+            "grade_on_test": 10,
+            "is_present": true
+          },
+          {
+            "lesson": 7,
+            "student": 13,
+            "grade_on_lesson": 8,
+            "grade_on_test": 9,
+            "is_present": true
+          },
+          {
+            "lesson": 1,
+            "student": 16,
+            "grade_on_lesson": 7,
+            "grade_on_test": 8,
+            "is_present": true
+          },
+          {
+            "lesson": 1,
+            "student": 17,
+            "grade_on_lesson": 9,
+            "grade_on_test": 10,
+            "is_present": true
+          },
+          {
+            "lesson": 1,
+            "student": 18,
+            "grade_on_lesson": 8,
+            "grade_on_test": 9,
+            "is_present": true
+          },
+          {
+            "lesson": 1,
+            "student": 19,
+            "grade_on_lesson": 6,
+            "grade_on_test": 7,
+            "is_present": true
+          },
+          {
+            "lesson": 1,
+            "student": 20,
+            "grade_on_lesson": 8,
+            "grade_on_test": 9,
+            "is_present": true
+          },
+          {
+            "lesson": 3,
+            "student": 12,
+            "grade_on_lesson": 9,
+            "grade_on_test": 10,
+            "is_present": true
+          },
+          {
+            "lesson": 3,
+            "student": 13,
+            "grade_on_lesson": 8,
+            "grade_on_test": 9,
+            "is_present": true
+          },
+          {
+            "lesson": 3,
+            "student": 14,
+            "grade_on_lesson": 6,
+            "grade_on_test": 7,
+            "is_present": true
+          },
+          {
+            "lesson": 3,
+            "student": 15,
+            "grade_on_lesson": 8,
+            "grade_on_test": 9,
+            "is_present": true
+          },
+          {
+            "lesson": 3,
+            "student": 16,
+            "grade_on_lesson": 7,
+            "grade_on_test": 8,
+            "is_present": true
+          },
+          {
+            "lesson": 3,
+            "student": 17,
+            "grade_on_lesson": 9,
+            "grade_on_test": 10,
+            "is_present": true
+          },
+          {
+            "lesson": 7,
+            "student": 12,
+            "grade_on_lesson": 9,
+            "grade_on_test": 10,
+            "is_present": true
+          },
+          {
+            "lesson": 7,
+            "student": 13,
+            "grade_on_lesson": 8,
+            "grade_on_test": 9,
+            "is_present": true
+          },
+          {
+            "lesson": 7,
+            "student": 14,
+            "grade_on_lesson": 7,
+            "grade_on_test": 8,
+            "is_present": true
+          },
+          {
+            "lesson": 7,
+            "student": 15,
+            "grade_on_lesson": 9,
+            "grade_on_test": 10,
+            "is_present": true
+          },
+          {
+            "lesson": 7,
+            "student": 16,
+            "grade_on_lesson": 8,
+            "grade_on_test": 9,
+            "is_present": true
+          },
+          {
+            "lesson": 7,
+            "student": 17,
+            "grade_on_lesson": 7,
+            "grade_on_test": 8,
+            "is_present": true
+          },
+          {
+            "lesson": 7,
+            "student": 18,
+            "grade_on_lesson": 9,
+            "grade_on_test": 10,
+            "is_present": true
+          },
+          {
+            "lesson": 1,
+            "student": 14,
+            "grade_on_lesson": 7,
+            "grade_on_test": 8,
+            "is_present": true
+          },
+          {
+            "lesson": 1,
+            "student": 15,
+            "grade_on_lesson": 9,
+            "grade_on_test": 10,
+            "is_present": true
+          },
+          {
+            "lesson": 1,
+            "student": 16,
+            "grade_on_lesson": 8,
+            "grade_on_test": 9,
+            "is_present": true
+          },
+          {
+            "lesson": 3,
+            "student": 18,
+            "grade_on_lesson": 9,
+            "grade_on_test": 10,
+            "is_present": true
+          },
+          {
+            "lesson": 3,
+            "student": 19,
+            "grade_on_lesson": 8,
+            "grade_on_test": 9,
+            "is_present": true
+          }
+    ]
+}
