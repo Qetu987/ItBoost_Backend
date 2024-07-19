@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   test:
@@ -61,12 +58,12 @@ jobs:
       env:
         DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
         DJANGO_ALLOWED_HOSTS: localhost
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: python manage.py migrate
 
     - name: Run tests
       env:
         DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
         DJANGO_ALLOWED_HOSTS: localhost
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: python manage.py test
