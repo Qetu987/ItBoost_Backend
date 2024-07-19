@@ -42,11 +42,14 @@ jobs:
       run: |
         #!/bin/bash
         set -e
-        until PGPASSWORD=${{ secrets.POSTGRES_PASSWORD }} psql -h "db" -U "${{ secrets.POSTGRES_USER }}" -c '\q'; do
-          >&2 echo "Postgres is unavailable - sleeping"
+        for i in {1..30}; do
+          if PGPASSWORD=${{ secrets.POSTGRES_PASSWORD }} psql -h "db" -U "${{ secrets.POSTGRES_USER }}" -d "${{ secrets.POSTGRES_DB }}" -c '\q'; then
+            echo "Postgres is up"
+            break
+          fi
+          echo "Postgres is unavailable - sleeping"
           sleep 5
         done
-        >&2 echo "Postgres is up - executing command"
 
     - name: Run migrations
       env:
