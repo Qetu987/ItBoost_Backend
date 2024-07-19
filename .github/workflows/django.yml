@@ -19,8 +19,11 @@ jobs:
         ports:
           - 5432:5432
     steps:
-    - name: Print environment variables
-      run: printenv
+    - name: Check database connection
+      run: |
+        echo "Checking database connection..."
+        PGPASSWORD=${{ secrets.POSTGRES_PASSWORD }} psql -h "db" -U "${{ secrets.POSTGRES_USER }}" -d "${{ secrets.POSTGRES_DB }}" -c '\q' || echo "Failed to connect"
+
     
     - name: Checkout code
       uses: actions/checkout@v2
