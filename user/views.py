@@ -9,9 +9,9 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsModerator
 
-class RegisterView(generics.CreateAPIView):
+class RegisterView(generics.CreateAPIView):    
     queryset = CustomUser.objects.all()
-    permission_classes = (AllowAny,)
+    permission_classes = [IsAuthenticated, IsModerator]
     serializer_class = CustomUserSerializer
 
     def create(self, request, *args, **kwargs):
