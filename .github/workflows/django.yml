@@ -50,9 +50,11 @@ jobs:
           echo "Postgres is unavailable - sleeping"
           sleep 5
         done
-
+    
     - name: Set environment variables
-      run: echo "DJANGO_ALLOWED_HOSTS=localhost" >> $GITHUB_ENV
+      run: |
+        echo "DJANGO_ALLOWED_HOSTS=localhost" >> $GITHUB_ENV
+        echo "DJANGO_SECRET_KEY=django-insecure-j7_x_dr_(@glj596@thju2e#wrfs#7%%@1&2r+aa+02o-&@!vb" >> $GITHUB_ENV
 
     - name: Run migrations
       env:
