@@ -3,7 +3,7 @@ name: Django CI/CD
 on:
   push:
     branches:
-      - main
+      - main  # или любая другая ветка, на которую вы хотите настроить деплой
 
 jobs:
   build:
@@ -18,6 +18,11 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
         ports:
           - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U ${{ secrets.POSTGRES_USER }} -d ${{ secrets.POSTGRES_DB }} -h localhost"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
 
     steps:
     - name: Checkout code
@@ -37,9 +42,9 @@ jobs:
       run: |
         #!/bin/bash
         set -e
-        until PGPASSWORD=${{ secrets.POSTGRES_PASSWORD }} psql -h "localhost" -U "${{ secrets.POSTGRES_USER }}" -c '\q'; do
+        until PGPASSWORD=${{ secrets.POSTGRES_PASSWORD }} psql -h "db" -U "${{ secrets.POSTGRES_USER }}" -c '\q'; do
           >&2 echo "Postgres is unavailable - sleeping"
-          sleep 1
+          sleep 5
         done
         >&2 echo "Postgres is up - executing command"
 
