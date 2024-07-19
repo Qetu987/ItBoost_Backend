@@ -3,7 +3,7 @@ name: Django CI/CD
 on:
   push:
     branches:
-      - main  # или любая другая ветка, на которую вы хотите настроить деплой
+      - main
 
 jobs:
   build:
@@ -33,10 +33,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Check environment variables
+    - name: Wait for database to be ready
       run: |
-        echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}"
-        echo "DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }}"
+        #!/bin/bash
+        set -e
+        until PGPASSWORD=${{ secrets.POSTGRES_PASSWORD }} psql -h "localhost" -U "${{ secrets.POSTGRES_USER }}" -c '\q'; do
+          >&2 echo "Postgres is unavailable - sleeping"
+          sleep 1
+        done
+        >&2 echo "Postgres is up - executing command"
 
     - name: Run migrations
       env:
