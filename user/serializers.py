@@ -15,3 +15,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
             role=validated_data['role'],
         )
         return user
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('id', 'username', 'email', 'role', 'avatar')

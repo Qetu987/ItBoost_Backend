@@ -23,8 +23,9 @@ class RegisterView(generics.CreateAPIView):
         return response
     
 
-class ProtectedModeratorAPIView(APIView):
-    permission_classes = [IsAuthenticated, IsModerator]
+class CurrentUserView(APIView):
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        return Response({'message': 'This is a protected API view for moderators only!'})
+        serializer = CustomUserSerializer(request.user)
+        return Response(serializer.data)

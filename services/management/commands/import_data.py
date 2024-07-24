@@ -1,6 +1,7 @@
 import json
 from django.core.management.base import BaseCommand
 from course.models import Course, CourseMatherial
+from django.contrib.auth.hashers import make_password
 from education.models import Group, Lesson, LessonGrade, Homework, Submission, Attendance
 from user.models import CustomUser, ModeratorProfile, StudentProfile, TeacherProfile
 
@@ -35,7 +36,7 @@ class Command(BaseCommand):
 
     def import_user(self, table_data):
         for row in table_data:
-            CustomUser.objects.create(**row)
+            CustomUser.objects.create_user(**row)
 
     def import_course(self, table_data):
         for row in table_data:
