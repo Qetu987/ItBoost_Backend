@@ -1,12 +1,14 @@
 from rest_framework import generics
 from .models import CustomUser
-from .serializers import CustomUserSerializer
+from .serializers import CustomUserSerializer, CustomTokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsModerator
+
 
 class RegisterView(generics.CreateAPIView):    
     queryset = CustomUser.objects.all()
@@ -20,6 +22,10 @@ class RegisterView(generics.CreateAPIView):
         response.data['refresh'] = str(refresh)
         response.data['access'] = str(refresh.access_token)
         return response
+    
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
     
 
 class CurrentUserView(APIView):

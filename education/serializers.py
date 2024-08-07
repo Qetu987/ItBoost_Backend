@@ -1,11 +1,9 @@
 from rest_framework import serializers
 from education.models import Lesson
 from user.models import CustomUser
+from user.serializers import UserSerializer
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CustomUser
-        fields = ['username', 'first_name', 'last_name', 'avatar']
+
 
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
