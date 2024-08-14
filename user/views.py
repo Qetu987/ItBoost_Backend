@@ -9,6 +9,9 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsModerator
 
+from rest_framework.decorators import permission_classes
+from drf_yasg.utils import swagger_auto_schema
+
 
 class RegisterView(generics.CreateAPIView):    
     queryset = CustomUser.objects.all()
@@ -27,10 +30,13 @@ class RegisterView(generics.CreateAPIView):
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
     
-
+@swagger_auto_schema(
+    operation_id='current_user_view',
+    operation_description='Retrieves the current user\'s information.',
+    security=[{'bearerAuth': []}]
+)
+@permission_classes([IsAuthenticated])
 class CurrentUserView(APIView):
-    permission_classes = [IsAuthenticated]
-
     def get(self, request):
         serializer = CustomUserSerializer(request.user)
         return Response(serializer.data)
