@@ -11,6 +11,8 @@ services:
       - "5432:5432"
     env_file:
       - .env
+    volumes:
+      - db_data:/var/lib/postgresql/data
 
   web:
     build: .
@@ -29,4 +31,5 @@ services:
       - .env
 
 volumes:
+  db_data:
   static_volume:
