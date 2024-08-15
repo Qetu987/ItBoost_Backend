@@ -1,10 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from education.serializers import CustomDataSerializer
+from education.serializers import CustomDataSerializer, ScheduleSerializer
 from education.models import Homework, Submission, Attendance, Lesson
 from user.models import CustomUser
-from datetime import datetime
+from datetime import datetime, timedelta
+from rest_framework import viewsets, status
 
 
 
@@ -45,4 +46,63 @@ class DashboardView(APIView):
         data = self.prepear_data(request)
 
         serializer = CustomDataSerializer(data)
+        return Response(serializer.data)
+    
+
+class ScheduleView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def prepare_schedule_data(self, request):
+        user = request.user
+        search_date = request.query_params.get('start_date')
+
+        if not search_date:
+            return Response({"detail": "Start date is required."}, status=400)
+        try:
+            search_date = datetime.fromisoformat(search_date)
+        except ValueError:
+            return Response({"detail": "Invalid date format. Use ISO format."}, status=400)
+
+        if user.role == 'student':
+            week_lessons = Lesson.objects.filter(
+                group__students__user=user,
+                lesson_date__range=self.search_week_days(search_date)
+            )
+
+            month_lessons = Lesson.objects.filter(
+                group__students__user=user,
+                lesson_date__range=self.search_month_days(search_date)
+            )
+        else:
+            week_lessons = Lesson.objects.filter(
+                teacher__user=user,
+                lesson_date__range=self.search_week_days(search_date)
+            )
+
+            month_lessons = Lesson.objects.filter(
+                teacher__user=user,
+                lesson_date__range=self.search_month_days(search_date)
+            )
+
+        return {
+            'week': week_lessons,
+            'month': month_lessons
+        }
+    
+    def search_month_days(self, search_date):
+        first_day_of_month = search_date.replace(day=1)
+        last_day_of_month = (search_date.replace(day=28) + timedelta(days=4)).replace(day=1) - timedelta(days=1)
+        return [first_day_of_month, last_day_of_month]
+    
+    def search_week_days(self, search_date):
+        start_of_week = search_date - timedelta(days=search_date.weekday())
+        end_of_week = start_of_week + timedelta(days=6)
+        return [start_of_week, end_of_week]
+
+    def get(self, request):
+        data = self.prepare_schedule_data(request)
+        if isinstance(data, Response):
+            return data
+
+        serializer = ScheduleSerializer(data)
         return Response(serializer.data)
