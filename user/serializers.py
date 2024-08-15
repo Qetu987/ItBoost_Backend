@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import CustomUser
+from .models import CustomUser, TeacherProfile
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -44,3 +44,13 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data['user_data'] = user_data
 
         return data
+    
+
+class TeacherProfileSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(source='user.first_name')
+    last_name = serializers.CharField(source='user.last_name')
+    bio = serializers.CharField()
+
+    class Meta:
+        model = TeacherProfile
+        fields = ['first_name', 'last_name', 'bio']

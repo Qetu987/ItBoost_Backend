@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from education.models import Lesson
 from user.models import CustomUser
-from user.serializers import UserSerializer
+from user.serializers import UserSerializer, TeacherProfileSerializer
+from course.serrializers import CourseSerializer
 
 
 
@@ -19,9 +20,11 @@ class CustomDataSerializer(serializers.Serializer):
 
 
 class LessonScheduleSerializer(serializers.ModelSerializer):
+    teacher = TeacherProfileSerializer(read_only=True)
+    course = CourseSerializer(read_only=True)
     class Meta:
         model = Lesson
-        fields = ['id', 'title', 'description', 'pdf_material', 'video_url', 'date_create', 'lesson_date']
+        fields = ['id', 'course', 'title', 'description', 'pdf_material', 'video_url', 'date_create', 'lesson_date', 'teacher']
 
 class ScheduleSerializer(serializers.Serializer):
     week = LessonScheduleSerializer(many=True)
