@@ -59,7 +59,8 @@ class Attendance(models.Model):
     student = models.ForeignKey(StudentProfile, verbose_name="Student", related_name='attendances', on_delete=models.CASCADE)
     grade_on_lesson = models.IntegerField("lesson grade", blank=True, null=True)
     grade_on_test = models.IntegerField("lesson grade", blank=True, null=True)
-    is_present = models.BooleanField("Is present", default=True)
+    is_present = models.BooleanField("Is present", default=False)
+    is_late = models.BooleanField("Is late", default=False)
     date = models.DateTimeField(auto_now_add=True, verbose_name="Date")
 
     def __str__(self):

@@ -1,11 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from education.serializers import CustomDataSerializer, ScheduleSerializer
+from education.serializers import CustomDataSerializer, ScheduleSerializer, LessonTodaySerializer
 from education.models import Homework, Submission, Attendance, Lesson
-from user.models import CustomUser
 from datetime import datetime, timedelta
-from rest_framework import viewsets, status
+from django.utils.timezone import now
+from user.permissions import IsTeacher
 
 
 
@@ -105,4 +105,28 @@ class ScheduleView(APIView):
             return data
 
         serializer = ScheduleSerializer(data)
+        return Response(serializer.data)
+    
+
+class TodayLessonScheduleView(APIView):
+    permission_classes = [IsAuthenticated, IsTeacher]
+
+    def get(self, request, lesson_id=None):
+        today = now().date()
+        teacher = request.user.teacherprofile
+
+        lessons = Lesson.objects.filter(teacher=teacher, lesson_date__date=today)
+        today_lessons = Lesson.objects.filter(teacher=teacher, lesson_date__date=today)
+        if lesson_id:
+            lessons = lessons.filter(id=lesson_id)
+
+        if not lessons.exists():
+            if not lesson_id:
+                lessons = Lesson.objects.filter(teacher=teacher, lesson_date__date=today).order_by('lesson_date')
+            if not lessons.exists():
+                return Response({"detail": "No lessons found for today."}, status=404)
+            
+        lesson = lessons.first()
+
+        serializer = LessonTodaySerializer(lesson, context={'today_lessons': today_lessons})
         return Response(serializer.data)
