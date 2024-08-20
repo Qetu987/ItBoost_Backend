@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from education.models import Lesson, Attendance
 from user.models import StudentProfile
-from user.serializers import UserSerializer, TeacherProfileSerializer
+from user.serializers import CustomUserSerializer, TeacherProfileSerializer
 from course.serrializers import CourseSerializer
 from django.utils import timezone
 
@@ -10,25 +10,28 @@ from django.utils import timezone
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
-        fields = ['id', 'title', 'description', 'pdf_material', 'video_url']
+        fields = ['id', 'title', 'description', 'lesson_date', 'duration', 'pdf_material', 'video_url']
 
-class CustomDataSerializer(serializers.Serializer):
-    user = UserSerializer()
-    homeworks = serializers.IntegerField()
-    average_mark = serializers.FloatField()
-    lesson_visited = serializers.DictField()
+class DushboardBaseSerializer(serializers.Serializer):
     future_lessons = LessonSerializer(many=True)
 
+class StudentDushboardSerializer(DushboardBaseSerializer):
+    homeworks = serializers.IntegerField()
+    average_mark = serializers.FloatField()
+    lesson_in_month = serializers.IntegerField()
+    lesson_visited = serializers.DictField()
+
+class TeacherDushboardSerializer(DushboardBaseSerializer):
+    homeworks_count = serializers.IntegerField()
 
 class LessonScheduleSerializer(serializers.ModelSerializer):
     teacher = TeacherProfileSerializer(read_only=True)
     course = CourseSerializer(read_only=True)
     class Meta:
         model = Lesson
-        fields = ['id', 'course', 'title', 'description', 'pdf_material', 'video_url', 'date_create', 'lesson_date', 'teacher', 'group']
+        fields = ['id', 'course', 'title', 'description', 'pdf_material', 'video_url', 'date_create', 'lesson_date', 'duration', 'teacher', 'group']
 
 class ScheduleSerializer(serializers.Serializer):
-    week = LessonScheduleSerializer(many=True)
     month = LessonScheduleSerializer(many=True)
 
 class AttendanceSerializer(serializers.ModelSerializer):
@@ -65,7 +68,7 @@ class LessonTodaySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lesson
-        fields = ['id', 'today_lessons', 'title', 'description', 'teacher', 'students']
+        fields = ['id', 'today_lessons', 'title', 'description', 'teacher', 'students', 'duration', 'lesson_date']
 
     def get_students(self, obj):
         group = obj.group

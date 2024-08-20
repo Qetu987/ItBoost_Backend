@@ -24,6 +24,7 @@ class Lesson(models.Model):
     date_create = models.DateTimeField(auto_now_add=True, verbose_name="Date of create")
     lesson_date = models.DateTimeField('Lesson Date and Time', blank=True, null=True)
     teacher = models.ForeignKey(TeacherProfile, verbose_name="Teacher", related_name='lessons', on_delete=models.CASCADE)
+    duration = models.IntegerField('Duration', blank=True, null=True, default=90)
     group = models.ForeignKey(Group, verbose_name="Group", related_name='lessons', on_delete=models.CASCADE)
 
     def __str__(self):

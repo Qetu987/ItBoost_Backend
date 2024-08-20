@@ -8,8 +8,7 @@ class GrouplAdmin(admin.ModelAdmin):
     list_display_links = ['id', 'title', 'owner']
     list_search = ['id', 'owner', 'title']
     list_filter = ['owner']
-
-
+    
     def get_image(self, obj):
         try:
             a = mark_safe(f'<img src={obj.poster.url} width="100" height="110">')
@@ -21,10 +20,10 @@ class GrouplAdmin(admin.ModelAdmin):
 
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
-    list_display = ['id', 'course', 'title', 'date_create', 'teacher']
+    list_display = ['id', 'course', 'title', 'date_create', 'teacher', 'group']
     list_display_links = ['id', 'course', 'title', 'teacher']
-    list_search = ['id', 'course', 'title', 'teacher']
-    list_filter = ['course', 'teacher']
+    list_search = ['id', 'course', 'title', 'teacher', 'group']
+    list_filter = ['course', 'teacher', 'group']
 
 
 @admin.register(Homework)

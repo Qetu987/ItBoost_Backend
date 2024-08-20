@@ -5,7 +5,7 @@ from .models import CustomUser, TeacherProfile, StudentProfile
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'password', 'email', 'role', 'first_name', 'last_name']
+        fields = ['id', 'username', 'password',  'first_name', 'last_name', 'email', 'role', 'avatar']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -16,12 +16,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
             role=validated_data['role'],
         )
         return user
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CustomUser
-        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'role', 'avatar')
-
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod

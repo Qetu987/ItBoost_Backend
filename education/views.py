@@ -1,10 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from education.serializers import CustomDataSerializer, ScheduleSerializer, LessonTodaySerializer
+from education.serializers import StudentDushboardSerializer, TeacherDushboardSerializer, ScheduleSerializer, LessonTodaySerializer
 from education.models import Homework, Submission, Attendance, Lesson
 from datetime import datetime, timedelta
-from django.utils.timezone import now
+from django.utils import timezone
 from user.permissions import IsTeacher
 
 
@@ -12,42 +12,98 @@ from user.permissions import IsTeacher
 class DashboardView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def prepear_data(seld, request):
-        user = request.user
+    def unsubmitted_homework_count(self, user):
+        submitted_homework_ids = Submission.objects.filter(student__user=user).values_list('homework_id', flat=True)
 
-        # Подсчитываем количество домашних заданий
-        homeworks_count = Homework.objects.filter(lesson__group__students__user=user).count()
+        return Homework.objects.filter(
+            lesson__group__students__user=user
+        ).exclude(
+            id__in=submitted_homework_ids
+        ).count()
 
-        # Считаем среднюю оценку
+    def average_mark(self, user):
         submissions = Submission.objects.filter(student__user=user)
-        total_grades = sum([submission.grade for submission in submissions if submission.grade is not None])
-        average_mark = total_grades / submissions.count() if submissions.count() > 0 else 0
-
-        # Посещенные уроки
         attendances = Attendance.objects.filter(student__user=user)
-        lesson_visited = {
+        submissions_total_grades = [submission.grade for submission in submissions if submission.grade is not None]
+        attendances_lessons_total_grades = [attendance.grade_on_lesson for attendance in attendances if attendance.grade_on_lesson is not None]
+        attendances_test_total_grades = [attendance.grade_on_test for attendance in attendances if attendance.grade_on_test is not None]
+        total_grades = list()
+        total_grades.extend(submissions_total_grades)
+        total_grades.extend(attendances_lessons_total_grades)
+        total_grades.extend(attendances_test_total_grades)
+
+        return sum(total_grades) / len(total_grades) if len(total_grades) > 0 else 0
+
+    def lesson_in_month(self, user):
+        date = timezone.localtime()
+        first_day_of_month = date.replace(day=1)
+        last_day_of_month = (date.replace(day=28) + timedelta(days=4)).replace(day=1) - timedelta(days=1)
+
+        monthly_lessons = Lesson.objects.filter(
+            group__students__user=user,
+            lesson_date__range=[first_day_of_month, last_day_of_month]
+        )
+        return monthly_lessons.count()
+
+    def lesson_visited(self, user): 
+        attendances = Attendance.objects.filter(student__user=user)
+        return {
             'all': attendances.count(),
             'visited': attendances.filter(is_present=True).count()
         }
+    
+    def student_lessons_list(self, user):
+        current_time = timezone.localtime()
+        two_weeks_later = current_time + timedelta(weeks=2)
+        return Lesson.objects.filter(
+            group__students__user=user, 
+            lesson_date__range=[current_time, two_weeks_later]
+        )
+    
+    def teacher_lessons_list(self, user):
+        current_time = timezone.localtime()
+        two_weeks_later = current_time + timedelta(weeks=2)
+        return Lesson.objects.filter(
+            teacher__user=user, 
+            lesson_date__range=[current_time, two_weeks_later]
+        )
 
-        # Будущие уроки (например, уроки после сегодняшней даты)
-        future_lessons = Lesson.objects.filter(group__students__user=user, date_create__gt=datetime.now())
+    def teacher_homeworks_count(self, user):
+        lessons_by_teacher = Lesson.objects.filter(teacher__user=user)
+        homeworks_by_teacher = Homework.objects.filter(lesson__in=lessons_by_teacher)
+        ungraded_homeworks = Submission.objects.filter(
+            homework__in=homeworks_by_teacher, 
+            grade__isnull=True
+            )
+        return ungraded_homeworks.count()
 
-        return {
-            'user': user,
-            'homeworks': homeworks_count,
-            'average_mark': average_mark,
-            'lesson_visited': lesson_visited,
-            'future_lessons': future_lessons
-        }
+    def prepear_data(self, request):
+        user = request.user
 
+        if user.role == 'student':
+            return {
+                'homeworks': self.unsubmitted_homework_count(user),
+                'average_mark': self.average_mark(user),
+                'lesson_in_month': self.lesson_in_month(user),
+                'lesson_visited': self.lesson_visited(user),
+                'future_lessons': self.student_lessons_list(user)
+            }
+        else:
+            return {
+                'homeworks_count': self.teacher_homeworks_count(user),
+                'future_lessons': self.teacher_lessons_list(user)
+            }
 
     def get(self, request):
         data = self.prepear_data(request)
 
-        serializer = CustomDataSerializer(data)
+        if request.user.role == 'student':
+            serializer = StudentDushboardSerializer(data)
+        elif request.user.role == 'teacher':
+            serializer = TeacherDushboardSerializer(data)
+        else:
+            return Response({"detail": "User has not data to dashboard."}, status=400)
         return Response(serializer.data)
-    
 
 class ScheduleView(APIView):
     permission_classes = [IsAuthenticated]
@@ -64,28 +120,17 @@ class ScheduleView(APIView):
             return Response({"detail": "Invalid date format. Use ISO format."}, status=400)
 
         if user.role == 'student':
-            week_lessons = Lesson.objects.filter(
-                group__students__user=user,
-                lesson_date__range=self.search_week_days(search_date)
-            )
-
             month_lessons = Lesson.objects.filter(
                 group__students__user=user,
                 lesson_date__range=self.search_month_days(search_date)
             )
         else:
-            week_lessons = Lesson.objects.filter(
-                teacher__user=user,
-                lesson_date__range=self.search_week_days(search_date)
-            )
-
             month_lessons = Lesson.objects.filter(
                 teacher__user=user,
                 lesson_date__range=self.search_month_days(search_date)
             )
 
         return {
-            'week': week_lessons,
             'month': month_lessons
         }
     
@@ -93,11 +138,6 @@ class ScheduleView(APIView):
         first_day_of_month = search_date.replace(day=1)
         last_day_of_month = (search_date.replace(day=28) + timedelta(days=4)).replace(day=1) - timedelta(days=1)
         return [first_day_of_month, last_day_of_month]
-    
-    def search_week_days(self, search_date):
-        start_of_week = search_date - timedelta(days=search_date.weekday())
-        end_of_week = start_of_week + timedelta(days=6)
-        return [start_of_week, end_of_week]
 
     def get(self, request):
         data = self.prepare_schedule_data(request)
@@ -112,7 +152,7 @@ class TodayLessonScheduleView(APIView):
     permission_classes = [IsAuthenticated, IsTeacher]
 
     def get(self, request, lesson_id=None):
-        today = now().date()
+        today = timezone.now().date()
         teacher = request.user.teacherprofile
 
         lessons = Lesson.objects.filter(teacher=teacher, lesson_date__date=today)
