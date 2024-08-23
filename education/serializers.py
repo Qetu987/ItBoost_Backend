@@ -1,19 +1,26 @@
 from rest_framework import serializers
-from education.models import Lesson, Attendance
+from education.models import Lesson, Attendance, Group
 from user.models import StudentProfile
-from user.serializers import CustomUserSerializer, TeacherProfileSerializer
+from user.serializers import TeacherProfileSerializer
 from course.serrializers import CourseSerializer
-from django.utils import timezone
 
 
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ['id', 'title', 'desc', 'poster', 'owner']
 
-class LessonSerializer(serializers.ModelSerializer):
+class LessonScheduleSerializer(serializers.ModelSerializer):
+    teacher = TeacherProfileSerializer(read_only=True)
+    course = CourseSerializer(read_only=True)
+    group = GroupSerializer(read_only=True)
+    
     class Meta:
         model = Lesson
-        fields = ['id', 'title', 'description', 'lesson_date', 'duration', 'pdf_material', 'video_url']
+        fields = ['id', 'course', 'date_create', 'lesson_date', 'duration', 'teacher', 'group']
 
 class DushboardBaseSerializer(serializers.Serializer):
-    future_lessons = LessonSerializer(many=True)
+    future_lessons = LessonScheduleSerializer(many=True)
 
 class StudentDushboardSerializer(DushboardBaseSerializer):
     homeworks = serializers.IntegerField()
@@ -23,13 +30,6 @@ class StudentDushboardSerializer(DushboardBaseSerializer):
 
 class TeacherDushboardSerializer(DushboardBaseSerializer):
     homeworks_count = serializers.IntegerField()
-
-class LessonScheduleSerializer(serializers.ModelSerializer):
-    teacher = TeacherProfileSerializer(read_only=True)
-    course = CourseSerializer(read_only=True)
-    class Meta:
-        model = Lesson
-        fields = ['id', 'course', 'title', 'description', 'pdf_material', 'video_url', 'date_create', 'lesson_date', 'duration', 'teacher', 'group']
 
 class ScheduleSerializer(serializers.Serializer):
     month = LessonScheduleSerializer(many=True)
