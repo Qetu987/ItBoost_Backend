@@ -10,6 +10,7 @@ class GroupSerializer(serializers.ModelSerializer):
         model = Group
         fields = ['id', 'title', 'desc', 'poster', 'owner']
 
+
 class LessonScheduleSerializer(serializers.ModelSerializer):
     teacher = TeacherProfileSerializer(read_only=True)
     course = CourseSerializer(read_only=True)
@@ -19,8 +20,10 @@ class LessonScheduleSerializer(serializers.ModelSerializer):
         model = Lesson
         fields = ['id', 'course', 'date_create', 'lesson_date', 'duration', 'teacher', 'group']
 
+
 class DushboardBaseSerializer(serializers.Serializer):
     future_lessons = LessonScheduleSerializer(many=True)
+
 
 class StudentDushboardSerializer(DushboardBaseSerializer):
     homeworks = serializers.IntegerField()
@@ -28,11 +31,13 @@ class StudentDushboardSerializer(DushboardBaseSerializer):
     lesson_in_month = serializers.IntegerField()
     lesson_visited = serializers.DictField()
 
+
 class TeacherDushboardSerializer(DushboardBaseSerializer):
     homeworks_count = serializers.IntegerField()
 
 class ScheduleSerializer(serializers.Serializer):
     month = LessonScheduleSerializer(many=True)
+
 
 class AttendanceSerializer(serializers.ModelSerializer):
     is_present = serializers.BooleanField()
@@ -42,6 +47,7 @@ class AttendanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attendance
         fields = ['is_present', 'is_late', 'grade_on_lesson']
+
 
 class StudentProfileSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(source='user.first_name')
@@ -62,24 +68,20 @@ class StudentProfileSerializer(serializers.ModelSerializer):
                 return AttendanceSerializer(attendance).data
         return None
 
+
 class LessonTodaySerializer(serializers.ModelSerializer):
     teacher = TeacherProfileSerializer()
     students = serializers.SerializerMethodField()
-    today_lessons = serializers.SerializerMethodField()
 
     class Meta:
         model = Lesson
-        fields = ['id', 'today_lessons', 'title', 'description', 'teacher', 'students', 'duration', 'lesson_date']
+        fields = ['id', 'title', 'description', 'teacher', 'students', 'duration', 'lesson_date']
 
     def get_students(self, obj):
         group = obj.group
         students = group.students.all()
         return StudentProfileSerializer(students, many=True, context={'lesson': obj}).data
-    
-    def get_today_lessons(self, obj):
-        today_lessons = self.context.get('today_lessons', [])
-        return LessonScheduleSerializer(today_lessons, many=True).data
-    
+
 
 class LessonThemeUpdateSerializer(serializers.ModelSerializer):
     class Meta:

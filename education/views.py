@@ -172,10 +172,8 @@ class TodayLessonScheduleView(APIView):
                 lessons = Lesson.objects.filter(teacher=teacher, lesson_date__date=today).order_by('lesson_date')
             if not lessons.exists():
                 return Response({"detail": "No lessons found for today."}, status=404)
-            
-        lesson = lessons.first()
 
-        serializer = LessonTodaySerializer(lesson, context={'today_lessons': today_lessons})
+        serializer = LessonTodaySerializer(lessons, many=True, context={'request': request})
         return Response(serializer.data)
 
 class LessonThemeView(APIView):
