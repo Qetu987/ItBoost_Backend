@@ -158,18 +158,13 @@ class ScheduleView(APIView):
 class TodayLessonScheduleView(APIView):
     permission_classes = [IsAuthenticated, IsTeacher]
 
-    def get(self, request, lesson_id=None):
+    def get(self, request):
         today = timezone.now().date()
         teacher = request.user.teacherprofile
 
-        lessons = Lesson.objects.filter(teacher=teacher, lesson_date__date=today)
-        today_lessons = Lesson.objects.filter(teacher=teacher, lesson_date__date=today)
-        if lesson_id:
-            lessons = lessons.filter(id=lesson_id)
+        lessons = Lesson.objects.filter(teacher=teacher, lesson_date__date=today).order_by('lesson_date')
 
         if not lessons.exists():
-            if not lesson_id:
-                lessons = Lesson.objects.filter(teacher=teacher, lesson_date__date=today).order_by('lesson_date')
             if not lessons.exists():
                 return Response({"detail": "No lessons found for today."}, status=404)
 
