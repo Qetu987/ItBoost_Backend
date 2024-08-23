@@ -72,10 +72,13 @@ class StudentProfileSerializer(serializers.ModelSerializer):
 class LessonTodaySerializer(serializers.ModelSerializer):
     teacher = TeacherProfileSerializer()
     students = serializers.SerializerMethodField()
+    course = CourseSerializer(read_only=True)
+    group = GroupSerializer(read_only=True)
+
 
     class Meta:
         model = Lesson
-        fields = ['id', 'title', 'description', 'teacher', 'students', 'duration', 'lesson_date']
+        fields = ['id', 'title', 'description', 'course', 'group', 'teacher', 'students', 'duration', 'lesson_date', 'date_create']
 
     def get_students(self, obj):
         group = obj.group
