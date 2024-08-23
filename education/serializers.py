@@ -90,3 +90,8 @@ class LessonThemeUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = ['title', 'description']
+
+class AttendanceUserCheckUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Attendance
+        fields = ['is_present', 'is_late']

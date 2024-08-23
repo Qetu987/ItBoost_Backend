@@ -7,12 +7,14 @@ from education.serializers import (
     TeacherDushboardSerializer, 
     ScheduleSerializer, 
     LessonTodaySerializer,
-    LessonThemeUpdateSerializer
+    LessonThemeUpdateSerializer,
+    AttendanceUserCheckUpdateSerializer
     )
 from education.models import Homework, Submission, Attendance, Lesson
 from datetime import datetime, timedelta
 from django.utils import timezone
 from user.permissions import IsTeacher
+from user.models import StudentProfile
 
 
 
@@ -189,5 +191,23 @@ class LessonThemeView(APIView):
                     defaults={'is_present': False, 'is_late': False}
                 )
                 attendance.save()
+            return Response({"message": "Success"}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class AttendanceUserCheckView(APIView):
+    permission_classes = [IsAuthenticated, IsTeacher]
+
+    def post(self, request, lesson_id, student_id):
+        lesson = Lesson.objects.get(id=lesson_id)
+        student = StudentProfile.objects.get(user_id=student_id)
+        attendance = Attendance.objects.filter(lesson=lesson, student=student).first()
+        serializer = AttendanceUserCheckUpdateSerializer(attendance, data=request.data, partial=True)
+        
+        if attendance is None:
+            return Response({"detail": "Invalid data. attendance is not create."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if serializer.is_valid():
+            serializer.save()
             return Response({"message": "Success"}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
