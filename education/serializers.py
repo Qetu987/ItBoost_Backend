@@ -48,10 +48,11 @@ class StudentProfileSerializer(serializers.ModelSerializer):
     last_name = serializers.CharField(source='user.last_name')
     avatar = serializers.ImageField(source='user.avatar')
     attendance = serializers.SerializerMethodField()
+    id = serializers.IntegerField(source='user_id', read_only=True)
 
     class Meta:
         model = StudentProfile
-        fields = ['first_name', 'last_name', 'avatar', 'attendance']
+        fields = ['id', 'first_name', 'last_name', 'avatar', 'attendance']
     
     def get_attendance(self, obj):
         lesson = self.context.get('lesson')
@@ -78,3 +79,9 @@ class LessonTodaySerializer(serializers.ModelSerializer):
     def get_today_lessons(self, obj):
         today_lessons = self.context.get('today_lessons', [])
         return LessonScheduleSerializer(today_lessons, many=True).data
+    
+
+class LessonThemeUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lesson
+        fields = ['title', 'description']

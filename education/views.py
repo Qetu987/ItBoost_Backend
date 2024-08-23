@@ -1,7 +1,14 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from education.serializers import StudentDushboardSerializer, TeacherDushboardSerializer, ScheduleSerializer, LessonTodaySerializer
+from rest_framework import status
+from education.serializers import (
+    StudentDushboardSerializer, 
+    TeacherDushboardSerializer, 
+    ScheduleSerializer, 
+    LessonTodaySerializer,
+    LessonThemeUpdateSerializer
+    )
 from education.models import Homework, Submission, Attendance, Lesson
 from datetime import datetime, timedelta
 from django.utils import timezone
@@ -170,3 +177,24 @@ class TodayLessonScheduleView(APIView):
 
         serializer = LessonTodaySerializer(lesson, context={'today_lessons': today_lessons})
         return Response(serializer.data)
+
+class LessonThemeView(APIView):
+    permission_classes = [IsAuthenticated, IsTeacher]
+
+    def post(self, request, lesson_id):
+        lesson = Lesson.objects.get(id=lesson_id)
+        serializer = LessonThemeUpdateSerializer(lesson, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+
+            group = lesson.group
+            students = group.students.all()
+            for student in students:
+                attendance, created = Attendance.objects.get_or_create(
+                    lesson=lesson,
+                    student=student,
+                    defaults={'is_present': False, 'is_late': False}
+                )
+                attendance.save()
+            return Response({"message": "Success"}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

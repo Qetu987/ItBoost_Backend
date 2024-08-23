@@ -64,6 +64,9 @@ class Attendance(models.Model):
     is_late = models.BooleanField("Is late", default=False)
     date = models.DateTimeField(auto_now_add=True, verbose_name="Date")
 
+    class Meta:
+        unique_together = ('lesson', 'student')
+
     def __str__(self):
         return f'{self.id}_{self.student.user.username}_{self.lesson.title}'
     
