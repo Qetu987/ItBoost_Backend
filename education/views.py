@@ -1,6 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 from rest_framework import status
 from education.serializers import (
     StudentDushboardSerializer, 
@@ -103,6 +105,15 @@ class DashboardView(APIView):
                 'future_lessons': self.teacher_lessons_list(user)
             }
 
+    @swagger_auto_schema(
+        operation_summary="Get User Dashboard",
+        operation_description="Provides detailed dashboard data for students or teachers based on their roles.",
+        responses={
+            200: 'Dynamic dashboard data returned based on user role',
+            400: 'Bad request if the user role is not handled'
+        },
+        tags=['Dashboard']
+    )
     def get(self, request):
         data = self.prepear_data(request)
 
@@ -148,6 +159,23 @@ class ScheduleView(APIView):
         last_day_of_month = (search_date.replace(day=28) + timedelta(days=4)).replace(day=1) - timedelta(days=1)
         return [first_day_of_month, last_day_of_month]
 
+    @swagger_auto_schema(
+        operation_summary="Retrieve Schedule",
+        operation_description="Retrieves the schedule for a month based on the given start date.",
+        manual_parameters=[
+            openapi.Parameter(
+                name='start_date',
+                in_=openapi.IN_QUERY,
+                description='Start date of the month to retrieve schedule for (in ISO format).',
+                type=openapi.TYPE_STRING,
+                required=True
+            )
+        ],
+        responses={
+            200: ScheduleSerializer(),
+            400: "Start date is required or Invalid date format. Use ISO format."
+        }
+    )
     def get(self, request):
         data = self.prepare_schedule_data(request)
         if isinstance(data, Response):
@@ -160,6 +188,15 @@ class ScheduleView(APIView):
 class TodayLessonScheduleView(APIView):
     permission_classes = [IsAuthenticated, IsTeacher]
 
+    @swagger_auto_schema(
+        operation_summary="Get today's lessons",
+        operation_description="Retrieves a list of today's lessons for the current teacher.",
+        responses={
+            200: LessonTodaySerializer(many=True),
+            404: 'No lessons found for today.'
+        },
+        tags=['Lessons']
+    )
     def get(self, request):
         today = timezone.now().date()
         teacher = request.user.teacherprofile
@@ -176,6 +213,17 @@ class TodayLessonScheduleView(APIView):
 class LessonThemeView(APIView):
     permission_classes = [IsAuthenticated, IsTeacher]
 
+    @swagger_auto_schema(
+        operation_summary="Update Lesson Theme",
+        operation_description="Updates the theme of a lesson and marks attendance for all students as not present and not late.",
+        request_body=LessonThemeUpdateSerializer,
+        responses={
+            200: openapi.Response('Success', examples={"application/json": {"message": "Success"}}),
+            400: openapi.Response('Bad Request', examples={"application/json": {"detail": "Error message"}}),
+            404: 'Lesson not found if the lesson_id does not exist'
+        },
+        tags=['Lessons']
+    )
     def post(self, request, lesson_id):
         lesson = Lesson.objects.get(id=lesson_id)
         serializer = LessonThemeUpdateSerializer(lesson, data=request.data, partial=True)
@@ -198,6 +246,17 @@ class LessonThemeView(APIView):
 class AttendanceUserCheckView(APIView):
     permission_classes = [IsAuthenticated, IsTeacher]
 
+    @swagger_auto_schema(
+        operation_summary="Update Attendance Record",
+        operation_description="Updates an attendance record for a specified student and lesson. Creates a new record if it does not exist.",
+        request_body=AttendanceUserCheckUpdateSerializer,
+        responses={
+            200: openapi.Response('Success', examples={"application/json": {"message": "Success"}}),
+            400: openapi.Response('Bad Request', examples={"application/json": {"detail": "Invalid data. Attendance record is not created or found."}}),
+            404: 'Lesson or student not found'
+        },
+        tags=['Attendance']
+    )
     def post(self, request, lesson_id, student_id):
         lesson = Lesson.objects.get(id=lesson_id)
         student = StudentProfile.objects.get(user_id=student_id)

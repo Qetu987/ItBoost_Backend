@@ -29,14 +29,4 @@ class RegisterView(generics.CreateAPIView):
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
-    
-@swagger_auto_schema(
-    operation_id='current_user_view',
-    operation_description='Retrieves the current user\'s information.',
-    security=[{'bearerAuth': []}]
-)
-@permission_classes([IsAuthenticated])
-class CurrentUserView(APIView):
-    def get(self, request):
-        serializer = CustomUserSerializer(request.user)
-        return Response(serializer.data)
+
