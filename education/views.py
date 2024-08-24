@@ -253,7 +253,13 @@ class AttendanceUserCheckView(APIView):
         request_body=AttendanceUserCheckUpdateSerializer,
         responses={
             200: openapi.Response('Success', examples={"application/json": {"message": "Success"}}),
-            400: openapi.Response('Bad Request', examples={"application/json": {"detail": "Invalid data. Attendance record is not created or found."}}),
+            400: openapi.Response('Bad Request', examples={
+                "application/json": {
+                    "detail": "Invalid data. Attendance is not create.",
+                    "detail": "Invalid user. Curent user is not a teacher in this lesson.",
+                    "detail": "Invalid data. Properties 'is_present' or 'is_late' not in request body.",
+                    }
+                }),
             404: 'Lesson or student not found'
         },
         tags=['Attendance']
@@ -273,6 +279,10 @@ class AttendanceUserCheckView(APIView):
             'is_present': request.data.get('is_present'),
             'is_late': request.data.get('is_late'),
             }
+        
+        if data['is_present'] == None or data['is_late'] == None:
+            return Response({"detail": "Invalid data. Properties 'is_present' or 'is_late' not in request body."}, status=status.HTTP_400_BAD_REQUEST)
+        
         serializer = AttendanceUserCheckUpdateSerializer(attendance, data=data, partial=True)
 
         if serializer.is_valid():
@@ -294,7 +304,8 @@ class AttendanceMarkCheckView(APIView):
                 "application/json": {
                     "detail": "Invalid user. Current user is not a teacher in this lesson.",
                     "detail": "Invalid user checking. Current student is absent in this lesson.",
-                    "detail": "Invalid data. Attendance record is not created."
+                    "detail": "Invalid data. Attendance record is not created.",
+                    "detail": "Invalid data. Properties 'grade_on_lesson' not in request body."
                 }
             }),
             404: 'Lesson or student not found'
@@ -310,12 +321,16 @@ class AttendanceMarkCheckView(APIView):
             return Response({"detail": "Invalid user. Curent user is not a teacher in this lesson."}, status=status.HTTP_400_BAD_REQUEST)
         
         if attendance.is_present != True:
-            return Response({"detail": "Invalid user checking. Curent student is absent in this lesson."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": "Invalid user Checking. Curent student is absent in this lesson."}, status=status.HTTP_400_BAD_REQUEST)
         
         if attendance is None:
-            return Response({"detail": "Invalid data. attendance is not create."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": "Invalid data. Attendance is not create."}, status=status.HTTP_400_BAD_REQUEST)
         
         data = {'grade_on_lesson': request.data.get('grade_on_lesson')}
+        
+        if data['grade_on_lesson'] == None:
+            return Response({"detail": "Invalid data. Properties 'grade_on_lesson' not in request body."}, status=status.HTTP_400_BAD_REQUEST)
+
         serializer = AttendanceMarkUpdateSerializer(attendance, data=data, partial=True)
         
         if serializer.is_valid():
