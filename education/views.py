@@ -10,7 +10,8 @@ from education.serializers import (
     ScheduleSerializer, 
     LessonTodaySerializer,
     LessonThemeUpdateSerializer,
-    AttendanceUserCheckUpdateSerializer
+    AttendanceUserCheckUpdateSerializer,
+    AttendanceMarkUpdateSerializer,
     )
 from education.models import Homework, Submission, Attendance, Lesson
 from datetime import datetime, timedelta
@@ -261,10 +262,44 @@ class AttendanceUserCheckView(APIView):
         lesson = Lesson.objects.get(id=lesson_id)
         student = StudentProfile.objects.get(user_id=student_id)
         attendance = Attendance.objects.filter(lesson=lesson, student=student).first()
-        serializer = AttendanceUserCheckUpdateSerializer(attendance, data=request.data, partial=True)
+        
+        if lesson.teacher.user != request.user:
+            return Response({"detail": "Invalid user. Curent user is not a teacher in this lesson."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if attendance is None:
+            return Response({"detail": "Invalid data. Attendance is not create."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        data = {
+            'is_present': request.data.get('is_present'),
+            'is_late': request.data.get('is_late'),
+            }
+        serializer = AttendanceUserCheckUpdateSerializer(attendance, data=data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "Success"}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class AttendanceMarkCheckView(APIView):
+    permission_classes = [IsAuthenticated, IsTeacher]
+
+    def post(self, request, lesson_id, student_id):
+        lesson = Lesson.objects.get(id=lesson_id)
+        student = StudentProfile.objects.get(user_id=student_id)
+        attendance = Attendance.objects.filter(lesson=lesson, student=student).first()
+
+        if lesson.teacher.user != request.user:
+            return Response({"detail": "Invalid user. Curent user is not a teacher in this lesson."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if attendance.is_present != True:
+            return Response({"detail": "Invalid user checking. Curent student is absent in this lesson."}, status=status.HTTP_400_BAD_REQUEST)
         
         if attendance is None:
             return Response({"detail": "Invalid data. attendance is not create."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        data = {'grade_on_lesson': request.data.get('grade_on_lesson')}
+        serializer = AttendanceMarkUpdateSerializer(attendance, data=data, partial=True)
         
         if serializer.is_valid():
             serializer.save()

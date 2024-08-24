@@ -95,3 +95,8 @@ class AttendanceUserCheckUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attendance
         fields = ['is_present', 'is_late']
+
+class AttendanceMarkUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Attendance
+        fields = ['grade_on_lesson']
