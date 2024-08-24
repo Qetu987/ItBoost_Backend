@@ -387,9 +387,6 @@ class HomeworksSetView(APIView):
             
             if lesson.teacher.user != request.user:
                 return Response({"detail": "Invalid user. Curent user is not a teacher in this lesson."}, status=status.HTTP_400_BAD_REQUEST)
-
-            if lesson.teacher.user != request.user:
-                return Response({"detail": "Invalid user. Current user is not a teacher in this lesson."}, status=status.HTTP_400_BAD_REQUEST)
             
             serializer.save()
             return Response({"message": "Created"}, status=status.HTTP_201_CREATED)
