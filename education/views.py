@@ -284,6 +284,23 @@ class AttendanceUserCheckView(APIView):
 class AttendanceMarkCheckView(APIView):
     permission_classes = [IsAuthenticated, IsTeacher]
 
+    @swagger_auto_schema(
+        operation_summary="Update Lesson Attendance Grade",
+        operation_description="Updates the attendance grade for a specified student and lesson. Checks if the student is marked present before updating the grade.",
+        request_body=AttendanceMarkUpdateSerializer,
+        responses={
+            200: openapi.Response('Success', examples={"application/json": {"message": "Success"}}),
+            400: openapi.Response('Bad Request', examples={
+                "application/json": {
+                    "detail": "Invalid user. Current user is not a teacher in this lesson.",
+                    "detail": "Invalid user checking. Current student is absent in this lesson.",
+                    "detail": "Invalid data. Attendance record is not created."
+                }
+            }),
+            404: 'Lesson or student not found'
+        },
+        tags=['Attendance']
+    )
     def post(self, request, lesson_id, student_id):
         lesson = Lesson.objects.get(id=lesson_id)
         student = StudentProfile.objects.get(user_id=student_id)
