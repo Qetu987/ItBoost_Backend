@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from education.models import Lesson, Attendance, Group
+from education.models import Lesson, Attendance, Group, Homework
 from user.models import StudentProfile
 from user.serializers import TeacherProfileSerializer
 from course.serrializers import CourseSerializer
@@ -34,6 +34,7 @@ class StudentDushboardSerializer(DushboardBaseSerializer):
 
 class TeacherDushboardSerializer(DushboardBaseSerializer):
     homeworks_count = serializers.IntegerField()
+
 
 class ScheduleSerializer(serializers.Serializer):
     month = LessonScheduleSerializer(many=True)
@@ -91,12 +92,25 @@ class LessonThemeUpdateSerializer(serializers.ModelSerializer):
         model = Lesson
         fields = ['title', 'description']
 
+
 class AttendanceUserCheckUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attendance
         fields = ['is_present', 'is_late']
 
+
 class AttendanceMarkUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attendance
         fields = ['grade_on_lesson']
+
+class HomeworkSetSerializer(serializers.ModelSerializer):
+    lesson = serializers.PrimaryKeyRelatedField(queryset=Lesson.objects.all())
+
+    class Meta:
+        model = Homework
+        fields = ['lesson', 'title', 'description', 'homework_file', 'due_date']
+
+    def create(self, validated_data):
+        homework = Homework.objects.create(**validated_data)
+        return homework

@@ -12,6 +12,7 @@ from education.serializers import (
     LessonThemeUpdateSerializer,
     AttendanceUserCheckUpdateSerializer,
     AttendanceMarkUpdateSerializer,
+    HomeworkSetSerializer,
     )
 from education.models import Homework, Submission, Attendance, Lesson
 from datetime import datetime, timedelta
@@ -265,7 +266,11 @@ class AttendanceUserCheckView(APIView):
         tags=['Attendance']
     )
     def post(self, request, lesson_id, student_id):
-        lesson = Lesson.objects.get(id=lesson_id)
+        try:
+            lesson = Lesson.objects.get(id=lesson_id)
+        except:
+            return Response({"detail": "Invalid lesson. Curent lesson does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+        
         student = StudentProfile.objects.get(user_id=student_id)
         attendance = Attendance.objects.filter(lesson=lesson, student=student).first()
         
@@ -313,7 +318,11 @@ class AttendanceMarkCheckView(APIView):
         tags=['Attendance']
     )
     def post(self, request, lesson_id, student_id):
-        lesson = Lesson.objects.get(id=lesson_id)
+        try:
+            lesson = Lesson.objects.get(id=lesson_id)
+        except:
+            return Response({"detail": "Invalid lesson. Curent lesson does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+        
         student = StudentProfile.objects.get(user_id=student_id)
         attendance = Attendance.objects.filter(lesson=lesson, student=student).first()
 
@@ -336,4 +345,53 @@ class AttendanceMarkCheckView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response({"message": "Success"}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class HomeworksSetView(APIView):
+    permission_classes = [IsAuthenticated, IsTeacher]
+
+    @swagger_auto_schema(
+        operation_summary="Set homework",
+        operation_description="Set homework for students in the lesson. Checks if lesson already exist and if user is owner of curent lesson.",
+        request_body=HomeworkSetSerializer,
+        responses={
+            200: openapi.Response('Created', examples={"application/json": {"message": "Success"}}),
+            400: openapi.Response('Bad Request', examples={
+                "application/json": {
+                    "detail": "Invalid data. Properties 'lesson' or 'title' or 'due_date' not in request body.",
+                    "detail": "Invalid user. Curent user is not a teacher in this lesson.",
+                    "detail": "Invalid user. Current user is not a teacher in this lesson.",
+                    "detail": "Invalid pk \"50\" - object does not exist."
+                }
+            }),
+            404: 'Lesson or student not found'
+        },
+        tags=['Attendance']
+    )
+    def post(self, request):
+        
+        data = {
+            'lesson': request.data.get('lesson'),
+            'title': request.data.get('title'),
+            'due_date': request.data.get('due_date'),
+            }
+
+        if data['lesson'] == None or data['title'] == None or data['due_date'] == None:
+            return Response({"detail": "Invalid data. Properties 'lesson' or 'title' or 'due_date' not in request body."}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = HomeworkSetSerializer(data=data)
+
+        if serializer.is_valid():
+            lesson = serializer.validated_data['lesson']
+            
+            if lesson.teacher.user != request.user:
+                return Response({"detail": "Invalid user. Curent user is not a teacher in this lesson."}, status=status.HTTP_400_BAD_REQUEST)
+
+            if lesson.teacher.user != request.user:
+                return Response({"detail": "Invalid user. Current user is not a teacher in this lesson."}, status=status.HTTP_400_BAD_REQUEST)
+            
+            serializer.save()
+            return Response({"message": "Created"}, status=status.HTTP_201_CREATED)
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
