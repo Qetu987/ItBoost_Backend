@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'education',
     'course',
     'services',
+    'web_site',
 ]
 
 REST_FRAMEWORK = {
