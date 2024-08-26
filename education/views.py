@@ -71,7 +71,7 @@ class DashboardView(APIView):
         return Lesson.objects.filter(
             group__students__user=user, 
             lesson_date__range=[current_time, two_weeks_later]
-        )
+        ).order_by('lesson_date')
     
     def teacher_lessons_list(self, user):
         current_time = timezone.localtime()
@@ -79,7 +79,7 @@ class DashboardView(APIView):
         return Lesson.objects.filter(
             teacher__user=user, 
             lesson_date__range=[current_time, two_weeks_later]
-        )
+        ).order_by('lesson_date')
 
     def teacher_homeworks_count(self, user):
         lessons_by_teacher = Lesson.objects.filter(teacher__user=user)
