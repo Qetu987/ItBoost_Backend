@@ -28,7 +28,7 @@ class CallBackRequestCreateView(APIView):
             401: "Unauthorized",
             400: "Bad Request"
         },
-        tags=['Callback Request']
+        tags=['Web-site Request']
     )
     def post(self, request):
         print('hi')
