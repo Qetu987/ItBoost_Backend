@@ -429,5 +429,8 @@ class HomeworksToCheckView(APIView):
             homeworks_by_teacher = Homework.objects.filter(lesson__in=lessons_by_teacher)
             homeworks = Submission.objects.filter(homework__in=homeworks_by_teacher, grade__isnull=True).order_by('date_submitted')
             serializer = SubmissionWievSerializer(homeworks, many=True)
+        
+        else:
+            return Response({"detail": "User hasn`t permission to check"}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response(serializer.data)
