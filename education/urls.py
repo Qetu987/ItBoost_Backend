@@ -6,7 +6,8 @@ from education.views import (
     LessonThemeView, 
     AttendanceUserCheckView,
     AttendanceMarkCheckView,
-    HomeworksSetView
+    HomeworksSetView,
+    HomeworksToCheckView
     )
 
 urlpatterns = [
@@ -16,5 +17,6 @@ urlpatterns = [
     path('lessons/<int:lesson_id>/theme/', LessonThemeView.as_view(), name='lesson-theme'),
     path('lessons/<int:lesson_id>/check/<int:student_id>/', AttendanceUserCheckView.as_view(), name='attendance-user-check'),
     path('lessons/<int:lesson_id>/mark/<int:student_id>/', AttendanceMarkCheckView.as_view(), name='attendance-mark'),
-    path('homework/set', HomeworksSetView.as_view(), name='homework-set')
+    path('homework/set', HomeworksSetView.as_view(), name='homework-set'),
+    path('homework/to_check/', HomeworksToCheckView.as_view(), name='homework-to-check')
 ]

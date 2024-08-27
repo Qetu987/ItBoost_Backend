@@ -13,6 +13,8 @@ from education.serializers import (
     AttendanceUserCheckUpdateSerializer,
     AttendanceMarkUpdateSerializer,
     HomeworkSetSerializer,
+    HomeworkWievSerializer,
+    SubmissionWievSerializer,
     )
 from education.models import Homework, Submission, Attendance, Lesson
 from datetime import datetime, timedelta
@@ -177,6 +179,7 @@ class ScheduleView(APIView):
             200: ScheduleSerializer(),
             400: "Start date is required or Invalid date format. Use ISO format."
         }
+        tags=['Schedule']
     )
     def get(self, request):
         data = self.prepare_schedule_data(request)
@@ -367,7 +370,7 @@ class HomeworksSetView(APIView):
             }),
             404: 'Lesson or student not found'
         },
-        tags=['Attendance']
+        tags=['Homework']
     )
     def post(self, request):
         
@@ -392,3 +395,39 @@ class HomeworksSetView(APIView):
             return Response({"message": "Created"}, status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+
+class HomeworksToCheckView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    @swagger_auto_schema(
+        operation_summary="Retrieve Homeworks to Check",
+        operation_description="Retrieves a list of homeworks to be checked by students or ungraded submissions by teachers.",
+        responses={
+            200: openapi.Response(
+                description="List of homeworks or submissions",
+                examples={
+                    "application/json": {
+                        "student": [{"id": 1, "title": "Math Homework", "description": "Solve all problems.", "due_date": "2023-12-01"}],
+                        "teacher": [{"id": 1, "student": "John Doe", "homework_id": 2, "date_submitted": "2023-11-01", "grade": None}]
+                    }
+                }
+            ),
+            401: "Unauthorized"
+        },
+        tags=['Homework']
+    )
+    def get(self, request):
+        if request.user.role == 'student':
+            submitted_homework_ids = Submission.objects.filter(student__user=request.user).values_list('homework_id', flat=True)
+            homeworks = Homework.objects.filter(lesson__group__students__user=request.user).exclude(id__in=submitted_homework_ids).order_by('date_create')
+            serializer = HomeworkWievSerializer(homeworks, many=True)
+        
+        elif request.user.role == 'teacher':
+            lessons_by_teacher = Lesson.objects.filter(teacher__user=request.user)
+            homeworks_by_teacher = Homework.objects.filter(lesson__in=lessons_by_teacher)
+            homeworks = Submission.objects.filter(homework__in=homeworks_by_teacher, grade__isnull=True).order_by('date_submitted')
+            serializer = SubmissionWievSerializer(homeworks, many=True)
+
+        return Response(serializer.data)

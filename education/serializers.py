@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from education.models import Lesson, Attendance, Group, Homework
+from education.models import Lesson, Attendance, Group, Homework, Submission
 from user.models import StudentProfile
 from user.serializers import TeacherProfileSerializer
 from course.serrializers import CourseSerializer
@@ -114,3 +114,30 @@ class HomeworkSetSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         homework = Homework.objects.create(**validated_data)
         return homework
+
+
+
+class LessonHomeworkSerializer(serializers.ModelSerializer):
+    teacher = TeacherProfileSerializer()
+    course = CourseSerializer(read_only=True)
+    group = GroupSerializer(read_only=True)
+
+
+    class Meta:
+        model = Lesson
+        fields = ['id', 'title', 'description', 'course', 'group', 'teacher', 'duration', 'lesson_date', 'date_create']
+
+class HomeworkWievSerializer(serializers.ModelSerializer):
+    lesson = LessonHomeworkSerializer()
+
+    class Meta:
+        model = Homework
+        fields = ['lesson', 'title', 'description', 'homework_file', 'due_date', 'date_create']
+
+
+class SubmissionWievSerializer(serializers.ModelSerializer):
+    homework = HomeworkWievSerializer()
+
+    class Meta:
+        model = Submission
+        fields = ['homework', 'student', 'file', 'date_submitted', 'grade', 'comment']
