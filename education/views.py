@@ -178,7 +178,7 @@ class ScheduleView(APIView):
         responses={
             200: ScheduleSerializer(),
             400: "Start date is required or Invalid date format. Use ISO format."
-        }
+        },
         tags=['Schedule']
     )
     def get(self, request):
