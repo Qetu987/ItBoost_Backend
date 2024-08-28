@@ -10,7 +10,8 @@ from education.views import (
     HomeworksToCheckView,
     SubmissionSetView,
     SubmissionSetMarkView,
-    StudentHomeworksByCourseView
+    StudentHomeworksByCourseView,
+    TeacherSubmissionsByGroupView
     )
 
 urlpatterns = [
@@ -23,6 +24,8 @@ urlpatterns = [
     path('homework/set/', HomeworksSetView.as_view(), name='homework-set'),
     path('homework/to_check/', HomeworksToCheckView.as_view(), name='homework-to-check'),
     path('homework/all_students_homeworks/', StudentHomeworksByCourseView.as_view(), name='all-students-homeworks'),
+    path('homework/all_teachers_homeworks/', TeacherSubmissionsByGroupView.as_view(), name='all-teachers-homeworks'),
+
     path('submission/to_send/', SubmissionSetView.as_view(), name='submission-to-send'),
     path('submission/set_mark/', SubmissionSetMarkView.as_view(), name='submission-set-mark'),
 ]

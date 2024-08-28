@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.db.models import Prefetch
 from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
@@ -19,9 +20,10 @@ from education.serializers import (
     SubmissionWievSerializer,
     SubmissionCreateSerializer,
     SubmissionSetMarkSerializer,
-    HomeworkListSerializer
+    HomeworkListSerializer,
+    GroupSerializer
     )
-from education.models import Homework, Submission, Attendance, Lesson
+from education.models import Homework, Submission, Attendance, Lesson, Group
 from datetime import datetime, timedelta
 from django.utils import timezone
 from user.permissions import IsTeacher, IsStudent
@@ -534,7 +536,7 @@ class StudentHomeworksByCourseView(APIView):
             400: openapi.Response(description="Invalid course ID or course not associated with student"),
             401: openapi.Response(description="Unauthorized")
         },
-        tags=['Student Homeworks']
+        tags=['Submissions']
     )
     def get(self, request):
         student = request.user.studentprofile
@@ -559,4 +561,57 @@ class StudentHomeworksByCourseView(APIView):
         return Response({
             'courses': courses_serializer.data,
             'homeworks': homeworks_serializer.data
+        })
+    
+
+class TeacherSubmissionsByGroupView(APIView):
+    permission_classes = [IsAuthenticated, IsTeacher]
+
+    @swagger_auto_schema(
+        operation_description="Retrieve submissions by group for a teacher.",
+        responses={
+            200: openapi.Response(
+                description="A list of groups with their submissions.",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'groups': openapi.Schema(
+                            type=openapi.TYPE_ARRAY,
+                            items=openapi.Items(type=openapi.TYPE_OBJECT, ref='#/definitions/Group')
+                        ),
+                        'submissions': openapi.Schema(
+                            type=openapi.TYPE_ARRAY,
+                            items=openapi.Items(type=openapi.TYPE_OBJECT, ref='#/definitions/SubmissionWiev')
+                        )
+                    }
+                )
+            ),
+            400: openapi.Response(description="Invalid group ID or group not associated with teacher.")
+        },
+        tags=['Submissions']
+    )
+    def get(self, request):
+        teacher = request.user.teacherprofile
+        group_id = request.data.get('group_id')
+
+        groups = Group.objects.filter(lessons__teacher=teacher).distinct()
+        groups_serializer = GroupSerializer(groups, many=True)
+
+        submissions = Submission.objects.none()
+        if group_id:
+            group = groups.filter(id=group_id).first()
+            if not group:
+                return Response({"detail": "Invalid group ID or group not associated with teacher."}, status=400)
+        else:
+            group = groups.first() if groups.exists() else None
+
+        if group:
+            submissions = Submission.objects.filter(homework__lesson__group=group).order_by('student', 'homework__id', 'date_submitted')
+            submissions = submissions.prefetch_related(Prefetch('student'), Prefetch('homework'))
+
+        submissions_serializer = SubmissionWievSerializer(submissions, many=True)
+
+        return Response({
+            'groups': groups_serializer.data,
+            'submissions': submissions_serializer.data
         })
