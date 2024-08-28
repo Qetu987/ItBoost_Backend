@@ -106,6 +106,7 @@ class AttendanceMarkUpdateSerializer(serializers.ModelSerializer):
 
 class HomeworkSetSerializer(serializers.ModelSerializer):
     lesson = serializers.PrimaryKeyRelatedField(queryset=Lesson.objects.all())
+    homework_file = serializers.FileField(max_length=None, allow_empty_file=False, use_url=True)
 
     class Meta:
         model = Homework

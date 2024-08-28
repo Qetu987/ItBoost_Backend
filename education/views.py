@@ -383,7 +383,7 @@ class HomeworksSetView(APIView):
         if data['lesson'] == None or data['title'] == None or data['due_date'] == None:
             return Response({"detail": "Invalid data. Properties 'lesson' or 'title' or 'due_date' not in request body."}, status=status.HTTP_400_BAD_REQUEST)
 
-        serializer = HomeworkSetSerializer(data=data)
+        serializer = HomeworkSetSerializer(data=request.data)
 
         if serializer.is_valid():
             lesson = serializer.validated_data['lesson']
