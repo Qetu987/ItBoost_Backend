@@ -523,21 +523,7 @@ class SubmissionSetMarkView(APIView):
 class StudentHomeworksByCourseView(APIView):
     permission_classes = [IsAuthenticated, IsStudent]
 
-    @swagger_auto_schema(
-        operation_summary="Get Homeworks by Course",
-        operation_description="Retrieves all homework assignments for a student by course. If course_id is provided, it returns homeworks for that course. Otherwise, it returns homeworks for the first course the student is enrolled in.",
-        responses={
-            200: openapi.Response(description="List of courses and homeworks", schema=openapi.Schema(
-                type=openapi.TYPE_OBJECT,
-                properties={
-                    'courses': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_OBJECT, ref=CourseSerializer)),
-                    'homeworks': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_OBJECT, ref=HomeworkListSerializer))
-                })),
-            400: openapi.Response(description="Invalid course ID or course not associated with student"),
-            401: openapi.Response(description="Unauthorized")
-        },
-        tags=['Submissions']
-    )
+    
     def get(self, request):
         student = request.user.studentprofile
         course_id = request.data.get('course_id')
@@ -567,7 +553,29 @@ class StudentHomeworksByCourseView(APIView):
 class TeacherSubmissionsByGroupView(APIView):
     permission_classes = [IsAuthenticated, IsTeacher]
 
-    
+    @swagger_auto_schema(
+        operation_description="Retrieve submissions by group for a teacher.",
+        responses={
+            200: openapi.Response(
+                description="A list of groups with their submissions.",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'groups': openapi.Schema(
+                            type=openapi.TYPE_ARRAY,
+                            items=openapi.Items(type=openapi.TYPE_OBJECT, ref='#/definitions/Group')
+                        ),
+                        'submissions': openapi.Schema(
+                            type=openapi.TYPE_ARRAY,
+                            items=openapi.Items(type=openapi.TYPE_OBJECT, ref='#/definitions/SubmissionWiev')
+                        )
+                    }
+                )
+            ),
+            400: openapi.Response(description="Invalid group ID or group not associated with teacher.")
+        },
+        tags=['Submissions']
+    )
     def get(self, request):
         teacher = request.user.teacherprofile
         group_id = request.data.get('group_id')
