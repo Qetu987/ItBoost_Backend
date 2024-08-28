@@ -445,16 +445,18 @@ class SubmissionSetView(APIView):
         operation_description="Allows students to create a new submission for homework assignments.",
         request_body=SubmissionCreateSerializer,
         responses={
-            201: openapi.Response("Submission created successfully", examples={
+            201: openapi.Response(description="Submission created successfully", examples={
                 "application/json": {"message": "Created"}
             }),
-            400: openapi.Response("Bad Request", examples={
+            400: openapi.Response(description="Bad Request", examples={
                 "application/json": {
                     "detail": "This field is required.",
                     "homework": ["This field is required."],
                 }
             }),
-            401: openapi.Response("Unauthorized", description="Authentication credentials were not provided.")
+            401: openapi.Response(description="Unauthorized", examples={
+                "application/json": {"detail": "Authentication credentials were not provided."}
+            })
         },
         tags=['Submissions']
     )
