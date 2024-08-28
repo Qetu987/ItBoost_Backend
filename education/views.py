@@ -553,29 +553,6 @@ class StudentHomeworksByCourseView(APIView):
 class TeacherSubmissionsByGroupView(APIView):
     permission_classes = [IsAuthenticated, IsTeacher]
 
-    @swagger_auto_schema(
-        operation_description="Retrieve submissions by group for a teacher.",
-        responses={
-            200: openapi.Response(
-                description="A list of groups with their submissions.",
-                schema=openapi.Schema(
-                    type=openapi.TYPE_OBJECT,
-                    properties={
-                        'groups': openapi.Schema(
-                            type=openapi.TYPE_ARRAY,
-                            items=openapi.Items(type=openapi.TYPE_OBJECT, ref='#/definitions/Group')
-                        ),
-                        'submissions': openapi.Schema(
-                            type=openapi.TYPE_ARRAY,
-                            items=openapi.Items(type=openapi.TYPE_OBJECT, ref='#/definitions/SubmissionWiev')
-                        )
-                    }
-                )
-            ),
-            400: openapi.Response(description="Invalid group ID or group not associated with teacher.")
-        },
-        tags=['Submissions']
-    )
     def get(self, request):
         teacher = request.user.teacherprofile
         group_id = request.data.get('group_id')
