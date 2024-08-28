@@ -15,11 +15,12 @@ from education.serializers import (
     HomeworkSetSerializer,
     HomeworkWievSerializer,
     SubmissionWievSerializer,
+    SubmissionCreateSerializer
     )
 from education.models import Homework, Submission, Attendance, Lesson
 from datetime import datetime, timedelta
 from django.utils import timezone
-from user.permissions import IsTeacher
+from user.permissions import IsTeacher, IsStudent
 from user.models import StudentProfile
 
 
@@ -434,3 +435,39 @@ class HomeworksToCheckView(APIView):
             return Response({"detail": "User hasn`t permission to check"}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response(serializer.data)
+    
+
+class SubmissionSetView(APIView):
+    permission_classes = [IsAuthenticated, IsStudent]
+
+    @swagger_auto_schema(
+        operation_summary="Create a new submission",
+        operation_description="Allows students to create a new submission for homework assignments.",
+        request_body=SubmissionCreateSerializer,
+        responses={
+            201: openapi.Response("Submission created successfully", examples={
+                "application/json": {"message": "Created"}
+            }),
+            400: openapi.Response("Bad Request", examples={
+                "application/json": {
+                    "detail": "This field is required.",
+                    "homework": ["This field is required."],
+                }
+            }),
+            401: openapi.Response("Unauthorized", description="Authentication credentials were not provided.")
+        },
+        tags=['Submissions']
+    )
+    def post(self, request):
+
+        data = request.data.copy()
+        data['student'] = request.user.studentprofile
+
+        serializer = SubmissionCreateSerializer(data=data)
+
+        if serializer.is_valid():            
+            serializer.save()
+            return Response({"message": "Created"}, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+

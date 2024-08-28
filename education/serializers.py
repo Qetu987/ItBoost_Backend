@@ -106,11 +106,11 @@ class AttendanceMarkUpdateSerializer(serializers.ModelSerializer):
 
 class HomeworkSetSerializer(serializers.ModelSerializer):
     lesson = serializers.PrimaryKeyRelatedField(queryset=Lesson.objects.all())
-    homework_file = serializers.FileField(max_length=None, allow_empty_file=False, use_url=True)
+    homework_file = serializers.FileField(max_length=None, allow_empty_file=False, use_url=True, required=False)
 
     class Meta:
         model = Homework
-        fields = ['lesson', 'title', 'description', 'homework_file', 'due_date']
+        fields = ['id', 'lesson', 'title', 'description', 'homework_file', 'due_date']
 
     def create(self, validated_data):
         homework = Homework.objects.create(**validated_data)
@@ -141,4 +141,17 @@ class SubmissionWievSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Submission
-        fields = ['homework', 'student', 'file', 'date_submitted', 'grade', 'comment']
+        fields = ['id', 'homework', 'student', 'file', 'date_submitted', 'grade', 'comment']
+
+
+class SubmissionCreateSerializer(serializers.ModelSerializer):
+    homework = serializers.PrimaryKeyRelatedField(queryset=Homework.objects.all())
+    file = serializers.FileField(max_length=None, allow_empty_file=False, use_url=True, required=False)
+
+    class Meta:
+        model = Submission
+        fields = ['id', 'homework', 'student', 'file', 'date_submitted', 'comment']
+
+    def create(self, validated_data):
+        submission = Submission.objects.create(**validated_data)
+        return submission

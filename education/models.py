@@ -50,6 +50,7 @@ class Submission(models.Model):
     date_submitted = models.DateTimeField(auto_now_add=True, verbose_name="Date submitted")
     grade = models.IntegerField('Grade', blank=True, null=True)
     comment = models.TextField('Comment', blank=True, null=True)
+    comment_from_teacher = models.TextField('Comment from teacher', blank=True, null=True)
 
     def __str__(self):
         return f'{self.id}_{self.student.user.username}_{self.homework.title}'
