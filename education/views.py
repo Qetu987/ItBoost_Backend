@@ -15,7 +15,8 @@ from education.serializers import (
     HomeworkSetSerializer,
     HomeworkWievSerializer,
     SubmissionWievSerializer,
-    SubmissionCreateSerializer
+    SubmissionCreateSerializer,
+    SubmissionSetMarkSerializer
     )
 from education.models import Homework, Submission, Attendance, Lesson
 from datetime import datetime, timedelta
@@ -473,3 +474,43 @@ class SubmissionSetView(APIView):
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class SubmissionSetMarkView(APIView):
+    permission_classes = [IsAuthenticated, IsTeacher]
+
+    @swagger_auto_schema(
+        operation_summary="Set or update a mark for a submission",
+        operation_description="Allows a teacher to set or update the mark for a specific submission.",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'id': openapi.Schema(type=openapi.TYPE_INTEGER, description='Submission ID'),
+                'mark': openapi.Schema(type=openapi.TYPE_INTEGER, description='Mark to set for the submission'),
+            },
+            required=['id', 'mark']  # Указываем, что поля id и mark обязательны
+        ),
+        responses={
+            200: openapi.Response(description="Mark updated successfully", examples={
+                "application/json": {"message": "Success"}
+            }),
+            400: openapi.Response(description="Bad Request"),
+            401: openapi.Response(description="Unauthorized")
+        },
+        tags=['Submissions']
+    )
+    def post(self, request):
+        try:
+            submission = Submission.objects.get(id=request.data['id'])
+        except:
+            return Response({"detail": "Invalid submission id. Curent submission is not create."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if submission.homework.lesson.teacher.user != request.user:
+            return Response({"detail": "Invalid user. Curent user is not a teacher in this lesson."}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = SubmissionSetMarkSerializer(submission, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "Success"}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    

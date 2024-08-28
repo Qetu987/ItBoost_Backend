@@ -155,3 +155,9 @@ class SubmissionCreateSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         submission = Submission.objects.create(**validated_data)
         return submission
+    
+
+class SubmissionSetMarkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Submission
+        fields = ['grade', 'comment_from_teacher']
