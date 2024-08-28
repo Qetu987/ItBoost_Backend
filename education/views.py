@@ -4,6 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from rest_framework import status
+from course.serrializers import CourseSerializer
+from course.models import Course
 from education.serializers import (
     StudentDushboardSerializer, 
     TeacherDushboardSerializer, 
@@ -16,7 +18,8 @@ from education.serializers import (
     HomeworkWievSerializer,
     SubmissionWievSerializer,
     SubmissionCreateSerializer,
-    SubmissionSetMarkSerializer
+    SubmissionSetMarkSerializer,
+    HomeworkListSerializer
     )
 from education.models import Homework, Submission, Attendance, Lesson
 from datetime import datetime, timedelta
@@ -514,3 +517,46 @@ class SubmissionSetMarkView(APIView):
             return Response({"message": "Success"}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+
+class StudentHomeworksByCourseView(APIView):
+    permission_classes = [IsAuthenticated, IsStudent]
+
+    @swagger_auto_schema(
+        operation_summary="Get Homeworks by Course",
+        operation_description="Retrieves all homework assignments for a student by course. If course_id is provided, it returns homeworks for that course. Otherwise, it returns homeworks for the first course the student is enrolled in.",
+        responses={
+            200: openapi.Response(description="List of courses and homeworks", schema=openapi.Schema(
+                type=openapi.TYPE_OBJECT,
+                properties={
+                    'courses': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_OBJECT, ref=CourseSerializer)),
+                    'homeworks': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_OBJECT, ref=HomeworkListSerializer))
+                })),
+            400: openapi.Response(description="Invalid course ID or course not associated with student"),
+            401: openapi.Response(description="Unauthorized")
+        },
+        tags=['Student Homeworks']
+    )
+    def get(self, request):
+        student = request.user.studentprofile
+        course_id = request.data.get('course_id')
+
+        courses = Course.objects.filter(lessons__group__students=student).distinct()
+        courses_serializer = CourseSerializer(courses, many=True)
+
+        homeworks = Homework.objects.none()
+        if course_id:
+            if any(course.id == int(course_id) for course in courses):
+                homeworks = Homework.objects.filter(lesson__course_id=course_id, lesson__group__students=student)
+            else:
+                return Response({"detail": "Invalid course ID or course not associated with student."}, status=400)
+        else:
+            if courses.exists():
+                first_course = courses.first()
+                homeworks = Homework.objects.filter(lesson__course=first_course, lesson__group__students=student)
+
+        homeworks_serializer = HomeworkListSerializer(homeworks, many=True, context={'request': request})
+
+        return Response({
+            'courses': courses_serializer.data,
+            'homeworks': homeworks_serializer.data
+        })

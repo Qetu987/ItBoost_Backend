@@ -133,7 +133,7 @@ class HomeworkWievSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Homework
-        fields = ['lesson', 'title', 'description', 'homework_file', 'due_date', 'date_create']
+        fields = ['id', 'lesson', 'title', 'description', 'homework_file', 'due_date', 'date_create']
 
 
 class SubmissionWievSerializer(serializers.ModelSerializer):
@@ -161,3 +161,24 @@ class SubmissionSetMarkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Submission
         fields = ['grade', 'comment_from_teacher']
+
+
+class SubmissionListViewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Submission
+        fields = ['id', 'file', 'date_submitted', 'comment', 'grade']
+
+class HomeworkListSerializer(serializers.ModelSerializer):
+    submission = serializers.SerializerMethodField()
+    lesson = LessonHomeworkSerializer()
+
+    class Meta:
+        model = Homework
+        fields = ['id', 'lesson', 'title', 'description', 'homework_file', 'due_date', 'date_create', 'submission']
+
+    def get_submission(self, obj):
+        student = self.context['request'].user.studentprofile  # Получаем студента из контекста запроса
+        submission = Submission.objects.filter(homework=obj, student=student).first()
+        if submission:
+            return SubmissionListViewSerializer(submission).data
+        return None
