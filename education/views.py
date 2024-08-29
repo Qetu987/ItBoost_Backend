@@ -490,9 +490,9 @@ class SubmissionSetMarkView(APIView):
             type=openapi.TYPE_OBJECT,
             properties={
                 'id': openapi.Schema(type=openapi.TYPE_INTEGER, description='Submission ID'),
-                'mark': openapi.Schema(type=openapi.TYPE_INTEGER, description='Mark to set for the submission'),
+                'Grade': openapi.Schema(type=openapi.TYPE_INTEGER, description='Mark to set for the submission'),
             },
-            required=['id', 'mark']  # Указываем, что поля id и mark обязательны
+            required=['id', 'Grade']
         ),
         responses={
             200: openapi.Response(description="Mark updated successfully", examples={
