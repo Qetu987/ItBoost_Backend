@@ -135,9 +135,19 @@ class HomeworkWievSerializer(serializers.ModelSerializer):
         model = Homework
         fields = ['id', 'lesson', 'title', 'description', 'homework_file', 'due_date', 'date_create']
 
+class StudentProfileForSubmissionSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(source='user.first_name')
+    last_name = serializers.CharField(source='user.last_name')
+    avatar = serializers.ImageField(source='user.avatar')
+    id = serializers.IntegerField(source='user_id', read_only=True)
+
+    class Meta:
+        model = StudentProfile
+        fields = ['id', 'first_name', 'last_name', 'avatar']
 
 class SubmissionWievSerializer(serializers.ModelSerializer):
     homework = HomeworkWievSerializer()
+    student = StudentProfileForSubmissionSerializer()
 
     class Meta:
         model = Submission
