@@ -50,3 +50,40 @@ class TeacherProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = TeacherProfile
         fields = ['first_name', 'last_name', 'avatar', 'role', 'bio']
+
+
+class StudentProfileSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(source='user.first_name')
+    last_name = serializers.CharField(source='user.last_name')
+    age = serializers.IntegerField()
+    avatar = serializers.ImageField(source='user.avatar')
+    role = serializers.CharField(source='user.role')
+
+    class Meta:
+        model = TeacherProfile
+        fields = ['first_name', 'last_name', 'avatar', 'role', 'bio']
+
+
+class ProfileSerializer(serializers.Serializer):
+    first_name = serializers.CharField(source='user.first_name')
+    last_name = serializers.CharField(source='user.last_name')
+    avatar = serializers.ImageField(source='user.avatar', allow_null=True, required=False)
+    role = serializers.CharField(source='user.role', read_only=True)
+    bio = serializers.CharField(allow_blank=True, required=False)
+    age = serializers.IntegerField(required=False)
+
+    class Meta:
+        fields = ['first_name', 'last_name', 'avatar', 'role', 'bio', 'age']
+
+
+    def update(self, instance, validated_data):
+        user_data = validated_data.pop('user', {})
+        for attr, value in user_data.items():
+            setattr(instance.user, attr, value)
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        instance.user.save()
+        instance.save()
+
+        return instance
