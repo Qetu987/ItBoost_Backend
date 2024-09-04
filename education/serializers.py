@@ -183,6 +183,7 @@ class SubmissionListViewSerializer(serializers.ModelSerializer):
 class HomeworkListSerializer(serializers.ModelSerializer):
     submission = serializers.SerializerMethodField()
     lesson = LessonHomeworkSerializer()
+    homework_file = serializers.SerializerMethodField()
 
     class Meta:
         model = Homework
@@ -193,4 +194,9 @@ class HomeworkListSerializer(serializers.ModelSerializer):
         submission = Submission.objects.filter(homework=obj, student=student).first()
         if submission:
             return SubmissionListViewSerializer(submission).data
+        return None
+    
+    def get_homework_file(self, obj):
+        if obj.homework_file:
+            return obj.homework_file.url  # Это вернет относительный путь
         return None

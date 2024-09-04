@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from course.models import Course, CourseMatherial
 from course.serrializers import CourseSerializer, CourseMaterialSerializer
 from user.permissions import IsTeacher, IsStudent
-    
+
 class CourseMaterialView(APIView):
     permission_classes = [IsAuthenticated, IsTeacher]
 
