@@ -526,7 +526,7 @@ class StudentHomeworksByCourseView(APIView):
     
     def get(self, request):
         student = request.user.studentprofile
-        course_id = request.data.get('course_id')
+        course_id = request.query_params.get('course_id')
 
         courses = Course.objects.filter(lessons__group__students=student).distinct()
         courses_serializer = CourseSerializer(courses, many=True)
