@@ -555,7 +555,7 @@ class TeacherSubmissionsByGroupView(APIView):
 
     def get(self, request):
         teacher = request.user.teacherprofile
-        group_id = request.data.get('group_id')
+        group_id = request.query_params.get('group_id')
 
         groups = Group.objects.filter(lessons__teacher=teacher).distinct()
         groups_serializer = GroupSerializer(groups, many=True)
@@ -567,6 +567,8 @@ class TeacherSubmissionsByGroupView(APIView):
                 return Response({"detail": "Invalid group ID or group not associated with teacher."}, status=400)
         else:
             group = groups.first() if groups.exists() else None
+
+        print(group)
 
         if group:
             submissions = Submission.objects.filter(homework__lesson__group=group).order_by('student', 'homework__id', 'date_submitted')
