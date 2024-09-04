@@ -54,7 +54,7 @@ class DashboardView(APIView):
         total_grades.extend(attendances_lessons_total_grades)
         total_grades.extend(attendances_test_total_grades)
 
-        return sum(total_grades) / len(total_grades) if len(total_grades) > 0 else 0
+        return round(sum(total_grades) / len(total_grades) if len(total_grades) > 0 else 0, 2)
 
     def lesson_in_month(self, user):
         date = timezone.localtime()
@@ -556,9 +556,18 @@ class TeacherSubmissionsByGroupView(APIView):
     def get(self, request):
         teacher = request.user.teacherprofile
         group_id = request.query_params.get('group_id')
+        course_id = request.query_params.get('course_id')
 
         groups = Group.objects.filter(lessons__teacher=teacher).distinct()
-        groups_serializer = GroupSerializer(groups, many=True)
+
+        response_data = []
+        for group in groups:
+            courses = Course.objects.filter(lessons__group=group, lessons__teacher=teacher).distinct()
+            courses_serializer = CourseSerializer(courses, many=True)
+
+            group_data = GroupSerializer(group).data
+            group_data['courses'] = courses_serializer.data
+            response_data.append(group_data)
 
         submissions = Submission.objects.none()
         if group_id:
@@ -567,16 +576,25 @@ class TeacherSubmissionsByGroupView(APIView):
                 return Response({"detail": "Invalid group ID or group not associated with teacher."}, status=400)
         else:
             group = groups.first() if groups.exists() else None
-
-        print(group)
-
+        print(course_id)
         if group:
-            submissions = Submission.objects.filter(homework__lesson__group=group).order_by('student', 'homework__id', 'date_submitted')
+            if course_id:
+                submissions = Submission.objects.filter(
+                    homework__lesson__group=group,
+                    homework__lesson__course_id=course_id
+                ).order_by('student', 'homework__id', 'date_submitted')
+            else:
+                first_course = Course.objects.filter(lessons__group=group, lessons__teacher=teacher).first()
+                if first_course:
+                    submissions = Submission.objects.filter(
+                        homework__lesson__group=group,
+                        homework__lesson__course=first_course
+                    ).order_by('student', 'homework__id', 'date_submitted')
             submissions = submissions.prefetch_related(Prefetch('student'), Prefetch('homework'))
 
         submissions_serializer = SubmissionWievSerializer(submissions, many=True)
 
         return Response({
-            'groups': groups_serializer.data,
+            'groups': response_data,
             'submissions': submissions_serializer.data
         })
