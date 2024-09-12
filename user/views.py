@@ -1,6 +1,7 @@
 from rest_framework import generics
 from .models import CustomUser
-from .serializers import CustomUserSerializer, CustomTokenObtainPairSerializer, TeacherProfileSerializer, StudentProfileSerializer, ProfileSerializer
+from .serializers import CustomUserSerializer, CustomTokenObtainPairSerializer, ProfileSerializer
+from education.serializers import GroupDetailSerializer, GroupSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.generics import RetrieveUpdateAPIView
@@ -8,14 +9,12 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 
 from user.models import TeacherProfile, StudentProfile
+from education.models import Group
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from .permissions import IsModerator
-
-from rest_framework.decorators import permission_classes
-from drf_yasg.utils import swagger_auto_schema
+from .permissions import IsModerator, IsTeacher
 
 
 class RegisterView(generics.CreateAPIView):    
@@ -60,3 +59,26 @@ class ProfileView(RetrieveUpdateAPIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TeacherGroupsView(APIView):
+    permission_classes = [IsAuthenticated, IsTeacher]
+
+    def get(self, request):
+        group_id = request.query_params.get('group_id')
+
+        teacher = request.user.teacherprofile
+        groups = Group.objects.filter(lessons__teacher=teacher).distinct()
+        group_serializer = GroupSerializer(groups, many=True)
+
+        # Получаем первую группу
+        if group_id:
+            group = Group.objects.filter(id=group_id).first()
+        else:
+            group = groups.first() if groups.exists() else None
+        group_detail_serializer = GroupDetailSerializer(group) if group else None
+
+        return Response({
+            'groups': group_serializer.data,
+            'students': group_detail_serializer.data if group_detail_serializer else None
+        })

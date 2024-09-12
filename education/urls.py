@@ -11,7 +11,7 @@ from education.views import (
     SubmissionSetView,
     SubmissionSetMarkView,
     StudentHomeworksByCourseView,
-    TeacherSubmissionsByGroupView
+    TeacherSubmissionsByGroupView,
     )
 
 urlpatterns = [

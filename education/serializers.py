@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from education.models import Lesson, Attendance, Group, Homework, Submission
 from user.models import StudentProfile
-from user.serializers import TeacherProfileSerializer
+from user.serializers import TeacherProfileSerializer, ProfileSerializer
 from course.serrializers import CourseSerializer
 
 
@@ -59,7 +59,7 @@ class StudentProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = StudentProfile
-        fields = ['id', 'first_name', 'last_name', 'avatar', 'attendance']
+        fields = ['id', 'first_name', 'last_name', 'age', 'avatar', 'attendance']
     
     def get_attendance(self, obj):
         lesson = self.context.get('lesson')
@@ -200,3 +200,14 @@ class HomeworkListSerializer(serializers.ModelSerializer):
         if obj.homework_file:
             return obj.homework_file.url  # Это вернет относительный путь
         return None
+
+class GroupDetailSerializer(serializers.ModelSerializer):
+    students = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Group
+        fields = ['id', 'title', 'desc', 'poster', 'students']
+
+    def get_students(self, obj):
+        students = obj.students.all()
+        return ProfileSerializer(students, many=True, context={'group': obj}).data
