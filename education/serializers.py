@@ -3,6 +3,7 @@ from education.models import Lesson, Attendance, Group, Homework, Submission
 from user.models import StudentProfile
 from user.serializers import TeacherProfileSerializer, ProfileSerializer
 from course.serrializers import CourseSerializer
+from course.models import Course
 
 
 class GroupSerializer(serializers.ModelSerializer):
@@ -211,3 +212,64 @@ class GroupDetailSerializer(serializers.ModelSerializer):
     def get_students(self, obj):
         students = obj.students.all()
         return ProfileSerializer(students, many=True, context={'group': obj}).data
+    
+
+class LessonActivitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lesson
+        fields = ['id', 'title', 'lesson_date', 'course']
+
+class StudentLessonActivitySerializer(serializers.Serializer):
+    lesson = LessonActivitySerializer()
+    is_present = serializers.BooleanField()
+    is_late = serializers.BooleanField()
+    grade_on_lesson = serializers.FloatField()
+    hw_mark = serializers.FloatField()
+
+class StudentActivitySerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(source='user.first_name')
+    last_name = serializers.CharField(source='user.last_name')
+    id = serializers.IntegerField(source='user.id')
+    lessons = serializers.SerializerMethodField()
+
+    class Meta:
+        model = StudentProfile
+        fields = ['id', 'first_name', 'last_name', 'lessons']
+
+    def get_lessons(self, student):
+        lessons = Lesson.objects.filter(group=self.context['group'], course=self.context['course'])
+        student_lessons = []
+        for lesson in lessons:
+            attendance = Attendance.objects.filter(lesson=lesson, student=student).first()
+            submission = Submission.objects.filter(homework__lesson=lesson, student=student).first()
+            student_lessons.append({
+                'lesson': LessonActivitySerializer(lesson).data,
+                'is_present': attendance.is_present if attendance else False,
+                'is_late': attendance.is_late if attendance else False,
+                'grade_on_lesson': attendance.grade_on_lesson if attendance else None,
+                'hw_mark': submission.grade if submission else None,
+            })
+        return student_lessons
+
+class GroupWithCoursesSerializer(serializers.ModelSerializer):
+    courses = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Group
+        fields = ['id', 'title', 'courses']
+
+    def get_courses(self, group):
+        courses = Course.objects.filter(lessons__group=group).distinct()
+        return CourseSerializer(courses, many=True).data
+
+class GroupDetailWithStudentsSerializer(serializers.ModelSerializer):
+    students = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Group
+        fields = ['id', 'title', 'students']
+
+    def get_students(self, group):
+        students = StudentProfile.objects.filter(group=group)
+        course = self.context['course']
+        return StudentActivitySerializer(students, many=True, context={'group': group, 'course': course}).data

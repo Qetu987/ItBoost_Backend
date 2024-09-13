@@ -21,9 +21,12 @@ from education.serializers import (
     SubmissionCreateSerializer,
     SubmissionSetMarkSerializer,
     HomeworkListSerializer,
-    GroupSerializer
+    GroupSerializer,
+    GroupDetailWithStudentsSerializer,
+    GroupWithCoursesSerializer
     )
 from education.models import Homework, Submission, Attendance, Lesson, Group
+from django.shortcuts import get_object_or_404
 from datetime import datetime, timedelta
 from django.utils import timezone
 from user.permissions import IsTeacher, IsStudent
@@ -597,4 +600,41 @@ class TeacherSubmissionsByGroupView(APIView):
         return Response({
             'groups': response_data,
             'submissions': submissions_serializer.data
+        })
+    
+
+class TeacherGroupCourseStudentActivityView(APIView):
+    permission_classes = [IsAuthenticated, IsTeacher] 
+    
+    def get(self, request):
+        teacher = request.user.teacherprofile
+        group_id = request.query_params.get('group_id')
+        course_id = request.query_params.get('course_id')
+        
+        groups = Group.objects.filter(lessons__teacher=teacher).distinct()
+        groups_serializer = GroupWithCoursesSerializer(groups, many=True)
+
+        if not groups.exists():
+            return Response({"detail": "No groups found for this teacher."}, status=404)
+        
+        if group_id:
+            group = get_object_or_404(groups, id=group_id)
+            if not group:
+                return Response({"detail": "Invalid group ID or group not associated with teacher."}, status=404)
+        else:
+            group = groups.first()
+
+        if course_id:
+            course = Course.objects.filter(id=course_id, lessons__group=group, lessons__teacher=teacher).first()
+            if not course:
+                return Response({"detail": "Invalid course ID or course not associated with teacher or group."}, status=400)
+        else:
+            course = Course.objects.filter(lessons__group=group, lessons__teacher=teacher).distinct().first()
+
+        group_detail_serializer = GroupDetailWithStudentsSerializer(group, context={'course': course})
+
+        # Формируем ответ
+        return Response({
+            'groups': groups_serializer.data,
+            'group': group_detail_serializer.data
         })

@@ -12,6 +12,7 @@ from education.views import (
     SubmissionSetMarkView,
     StudentHomeworksByCourseView,
     TeacherSubmissionsByGroupView,
+    TeacherGroupCourseStudentActivityView,
     )
 
 urlpatterns = [
@@ -28,4 +29,6 @@ urlpatterns = [
 
     path('submission/to_send/', SubmissionSetView.as_view(), name='submission-to-send'),
     path('submission/set_mark/', SubmissionSetMarkView.as_view(), name='submission-set-mark'),
+
+    path('group/activity/', TeacherGroupCourseStudentActivityView.as_view(), name='group_activity'),
 ]
