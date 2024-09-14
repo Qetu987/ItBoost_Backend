@@ -69,11 +69,13 @@ class ProfileSerializer(serializers.Serializer):
     last_name = serializers.CharField(source='user.last_name')
     avatar = serializers.ImageField(source='user.avatar', allow_null=True, required=False)
     role = serializers.CharField(source='user.role', read_only=True)
+    email = serializers.CharField(source='user.email')
+    phone_number = serializers.CharField(source='user.phone_number')
     bio = serializers.CharField(allow_blank=True, required=False)
     age = serializers.IntegerField(required=False)
 
     class Meta:
-        fields = ['first_name', 'last_name', 'avatar', 'role', 'bio', 'age']
+        fields = ['first_name', 'last_name', 'avatar', 'phone_number', 'email', 'role', 'bio', 'age']
 
 
     def update(self, instance, validated_data):

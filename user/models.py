@@ -9,6 +9,7 @@ class CustomUser(AbstractUser):
     )
     avatar = models.ImageField("Avatar", upload_to="profile/avatars/", blank=True, null=True)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
+    phone_number = models.CharField(max_length=30, default='+38(066) 000 00 00', blank=True, null=True)
     groups = models.ManyToManyField(
         Group,
         related_name='customuser_set',
