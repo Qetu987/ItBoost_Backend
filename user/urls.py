@@ -1,6 +1,7 @@
 from django.urls import path
 from user.views import RegisterView, CustomTokenObtainPairView, ProfileView, TeacherGroupsView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from education.views import StudentCourseActivityView
 
 urlpatterns = [
     path('register/', RegisterView.as_view(), name='auth_register'),
@@ -9,4 +10,5 @@ urlpatterns = [
     path('profile/', ProfileView.as_view(), name='profile'),
 
     path('student_list/', TeacherGroupsView.as_view(), name='student_list'),
+    path('activity/', StudentCourseActivityView.as_view(), name='activity'),
 ]

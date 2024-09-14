@@ -22,8 +22,7 @@ from education.serializers import (
     SubmissionSetMarkSerializer,
     HomeworkListSerializer,
     GroupSerializer,
-    GroupDetailWithStudentsSerializer,
-    GroupWithCoursesSerializer
+    CourseDetailWithStudentLessonsSerializer
     )
 from education.models import Homework, Submission, Attendance, Lesson, Group
 from django.shortcuts import get_object_or_404
@@ -603,38 +602,30 @@ class TeacherSubmissionsByGroupView(APIView):
         })
     
 
-class TeacherGroupCourseStudentActivityView(APIView):
-    permission_classes = [IsAuthenticated, IsTeacher] 
+class StudentCourseActivityView(APIView):
+    permission_classes = [IsAuthenticated, IsStudent] 
     
     def get(self, request):
-        teacher = request.user.teacherprofile
-        group_id = request.query_params.get('group_id')
+        student = request.user.studentprofile
         course_id = request.query_params.get('course_id')
         
-        groups = Group.objects.filter(lessons__teacher=teacher).distinct()
-        groups_serializer = GroupWithCoursesSerializer(groups, many=True)
+        courses = Course.objects.filter(lessons__group__students=student).distinct()
+        courses_serializer = CourseSerializer(courses, many=True)
 
-        if not groups.exists():
-            return Response({"detail": "No groups found for this teacher."}, status=404)
+        if not courses.exists():
+            return Response({"detail": "No courses found for this student."}, status=404)
         
-        if group_id:
-            group = get_object_or_404(groups, id=group_id)
-            if not group:
-                return Response({"detail": "Invalid group ID or group not associated with teacher."}, status=404)
-        else:
-            group = groups.first()
-
         if course_id:
-            course = Course.objects.filter(id=course_id, lessons__group=group, lessons__teacher=teacher).first()
+            course = get_object_or_404(courses, id=course_id)
             if not course:
-                return Response({"detail": "Invalid course ID or course not associated with teacher or group."}, status=400)
+                return Response({"detail": "Invalid course ID or course not associated with student."}, status=404)
         else:
-            course = Course.objects.filter(lessons__group=group, lessons__teacher=teacher).distinct().first()
+            course = courses.first()
 
-        group_detail_serializer = GroupDetailWithStudentsSerializer(group, context={'course': course})
+        course_detail_serializer = CourseDetailWithStudentLessonsSerializer(course, context={'student': student})
 
         # Формируем ответ
         return Response({
-            'groups': groups_serializer.data,
-            'group': group_detail_serializer.data
+            'courses': courses_serializer.data,
+            'current_course': course_detail_serializer.data
         })

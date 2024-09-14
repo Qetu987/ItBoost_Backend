@@ -214,62 +214,53 @@ class GroupDetailSerializer(serializers.ModelSerializer):
         return ProfileSerializer(students, many=True, context={'group': obj}).data
     
 
-class LessonActivitySerializer(serializers.ModelSerializer):
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = ['id', 'title', 'desc', 'poster', 'date_create', 'Lesson_count']
+
+
+class LessonStudentActivitySerializer(serializers.ModelSerializer):
+    is_present = serializers.SerializerMethodField()
+    is_late = serializers.SerializerMethodField()
+    grade_on_lesson = serializers.SerializerMethodField()
+    homework_grade = serializers.SerializerMethodField()
+
     class Meta:
         model = Lesson
-        fields = ['id', 'title', 'lesson_date', 'course']
+        fields = ['id', 'title', 'lesson_date', 'is_present', 'is_late', 'grade_on_lesson', 'homework_grade']
 
-class StudentLessonActivitySerializer(serializers.Serializer):
-    lesson = LessonActivitySerializer()
-    is_present = serializers.BooleanField()
-    is_late = serializers.BooleanField()
-    grade_on_lesson = serializers.FloatField()
-    hw_mark = serializers.FloatField()
+    def get_is_present(self, lesson):
+        student = self.context['student']
+        attendance = Attendance.objects.filter(lesson=lesson, student=student).first()
+        return attendance.is_present if attendance else None
 
-class StudentActivitySerializer(serializers.ModelSerializer):
-    first_name = serializers.CharField(source='user.first_name')
-    last_name = serializers.CharField(source='user.last_name')
-    id = serializers.IntegerField(source='user.id')
+    def get_is_late(self, lesson):
+        student = self.context['student']
+        attendance = Attendance.objects.filter(lesson=lesson, student=student).first()
+        return attendance.is_late if attendance else None
+
+    def get_grade_on_lesson(self, lesson):
+        student = self.context['student']
+        grade = Attendance.objects.filter(lesson=lesson, student=student).first()
+        return grade.grade_on_lesson if grade else None
+
+    def get_homework_grade(self, lesson):
+        student = self.context['student']
+        homework = Homework.objects.filter(lesson=lesson).first()
+        if homework:
+            submission = Submission.objects.filter(homework=homework, student=student).first()
+            return submission.grade if submission else None
+        return None
+
+class CourseDetailWithStudentLessonsSerializer(serializers.ModelSerializer):
     lessons = serializers.SerializerMethodField()
 
     class Meta:
-        model = StudentProfile
-        fields = ['id', 'first_name', 'last_name', 'lessons']
+        model = Course
+        fields = ['id', 'title', 'desc', 'poster', 'date_create', 'Lesson_count', 'lessons']
 
-    def get_lessons(self, student):
-        lessons = Lesson.objects.filter(group=self.context['group'], course=self.context['course'])
-        student_lessons = []
-        for lesson in lessons:
-            attendance = Attendance.objects.filter(lesson=lesson, student=student).first()
-            submission = Submission.objects.filter(homework__lesson=lesson, student=student).first()
-            student_lessons.append({
-                'lesson': LessonActivitySerializer(lesson).data,
-                'is_present': attendance.is_present if attendance else False,
-                'is_late': attendance.is_late if attendance else False,
-                'grade_on_lesson': attendance.grade_on_lesson if attendance else None,
-                'hw_mark': submission.grade if submission else None,
-            })
-        return student_lessons
-
-class GroupWithCoursesSerializer(serializers.ModelSerializer):
-    courses = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Group
-        fields = ['id', 'title', 'courses']
-
-    def get_courses(self, group):
-        courses = Course.objects.filter(lessons__group=group).distinct()
-        return CourseSerializer(courses, many=True).data
-
-class GroupDetailWithStudentsSerializer(serializers.ModelSerializer):
-    students = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Group
-        fields = ['id', 'title', 'students']
-
-    def get_students(self, group):
-        students = StudentProfile.objects.filter(group=group)
-        course = self.context['course']
-        return StudentActivitySerializer(students, many=True, context={'group': group, 'course': course}).data
+    def get_lessons(self, course):
+        student = self.context['student']
+        lessons = Lesson.objects.filter(course=course, group__students=student)
+        return LessonStudentActivitySerializer(lessons, many=True, context={'student': student}).data
