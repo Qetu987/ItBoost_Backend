@@ -17,7 +17,7 @@ class Group(models.Model):
 class Lesson(models.Model):
     course = models.ForeignKey(Course, verbose_name="Course", related_name='lessons', on_delete=models.CASCADE)
     course_material = models.ForeignKey(CourseMatherial, verbose_name="Material of lesson", related_name='lessons', on_delete=models.CASCADE)
-    title = models.CharField('Lesson title', max_length=300, blank=False, null=False)
+    title = models.CharField('Lesson title', max_length=300, blank=True, null=True)
     description = models.TextField('Lesson description', blank=True, null=True)
     pdf_material = models.FileField('Lesson PDF Material', upload_to='lessons/pdfs/', blank=True, null=True)
     video_url = models.URLField('Lesson Video URL', blank=True, null=True)
