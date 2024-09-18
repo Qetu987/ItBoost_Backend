@@ -262,5 +262,9 @@ class CourseDetailWithStudentLessonsSerializer(serializers.ModelSerializer):
 
     def get_lessons(self, course):
         student = self.context['student']
-        lessons = Lesson.objects.filter(course=course, group__students=student)
+        lessons = Lesson.objects.filter(
+            course=course,
+            group__students=student,
+            attendances__student=student
+        ).distinct()
         return LessonStudentActivitySerializer(lessons, many=True, context={'student': student}).data
