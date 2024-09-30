@@ -16,6 +16,7 @@ class Course(models.Model):
 class CourseMatherial(models.Model):
     course = models.ForeignKey(Course, verbose_name="Course", related_name='materials', on_delete=models.CASCADE)
     title = models.CharField('Name of material', max_length=300, blank=False, null=False)
+    order_number = models.IntegerField("Order number", blank=True, null=True)
     desc = models.TextField('Material description', blank=True, null=True)
     pdf_file = models.FileField('File', upload_to='course/pdfs/', blank=True, null=True)
     date_create = models.DateTimeField(auto_now_add=True, verbose_name="date of create", blank=True)
