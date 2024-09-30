@@ -2,7 +2,7 @@ from django.db import models
 from user.models import ModeratorProfile
 
 class Course(models.Model):
-    title = models.CharField('Name of course', max_length=300, unique=True, blank=False, null=False)
+    title = models.CharField('Name of course', max_length=300, blank=False, null=False)
     desc = models.TextField('Course description', blank=True, null=True)
     poster = models.ImageField("Course image", upload_to="course/", blank=True, null=True)
     date_create = models.DateTimeField(auto_now_add=True, verbose_name="date of create", blank=True)
