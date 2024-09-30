@@ -23,7 +23,7 @@ class CourseMaterialView(APIView):
 
         if current_course:
             current_course_data = CourseSerializer(current_course).data
-            materials = CourseMatherial.objects.filter(course=current_course)
+            materials = CourseMatherial.objects.filter(course=current_course).order_by('order_number')
             materials_serializer = CourseMaterialSerializer(materials, many=True)
             current_course_data['materials'] = materials_serializer.data
 
