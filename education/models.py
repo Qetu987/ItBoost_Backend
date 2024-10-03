@@ -20,6 +20,7 @@ class Lesson(models.Model):
     title = models.CharField('Lesson title', max_length=300, blank=True, null=True)
     description = models.TextField('Lesson description', blank=True, null=True)
     pdf_material = models.FileField('Lesson PDF Material', upload_to='lessons/pdfs/', blank=True, null=True)
+    lesson_url = models.URLField('Lesson meet URL', blank=True, null=True)
     video_url = models.URLField('Lesson Video URL', blank=True, null=True)
     date_create = models.DateTimeField(auto_now_add=True, verbose_name="Date of create")
     lesson_date = models.DateTimeField('Lesson Date and Time', blank=True, null=True)

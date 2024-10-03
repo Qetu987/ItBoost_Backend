@@ -19,7 +19,7 @@ class LessonScheduleSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Lesson
-        fields = ['id', 'course', 'date_create', 'lesson_date', 'duration', 'teacher', 'group']
+        fields = ['id', 'course', 'date_create', 'lesson_url','lesson_date', 'duration', 'teacher', 'group']
 
 
 class DushboardBaseSerializer(serializers.Serializer):
@@ -80,7 +80,7 @@ class LessonTodaySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lesson
-        fields = ['id', 'title', 'description', 'course', 'group', 'teacher', 'students', 'duration', 'lesson_date', 'date_create']
+        fields = ['id', 'title', 'description', 'course', 'lesson_url', 'group', 'teacher', 'students', 'duration', 'lesson_date', 'date_create']
 
     def get_students(self, obj):
         group = obj.group
@@ -91,7 +91,7 @@ class LessonTodaySerializer(serializers.ModelSerializer):
 class LessonThemeUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
-        fields = ['title', 'description']
+        fields = ['title', 'description', 'lesson_url']
 
 
 class AttendanceUserCheckUpdateSerializer(serializers.ModelSerializer):
@@ -127,7 +127,7 @@ class LessonHomeworkSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lesson
-        fields = ['id', 'title', 'description', 'course', 'group', 'teacher', 'duration', 'lesson_date', 'date_create']
+        fields = ['id', 'title', 'description', 'course', 'lesson_url', 'group', 'teacher', 'duration', 'lesson_date', 'date_create']
 
 class HomeworkWievSerializer(serializers.ModelSerializer):
     lesson = LessonHomeworkSerializer()
@@ -228,7 +228,7 @@ class LessonStudentActivitySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lesson
-        fields = ['id', 'title', 'lesson_date', 'is_present', 'is_late', 'grade_on_lesson', 'homework_grade']
+        fields = ['id', 'title', 'lesson_date', 'lesson_url','is_present', 'is_late', 'grade_on_lesson', 'homework_grade']
 
     def get_is_present(self, lesson):
         student = self.context['student']
